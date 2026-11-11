@@ -18,9 +18,19 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js"
+  }
+}
+</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
+
+<canvas id="webgl" aria-hidden="true"></canvas>
+<div class="webgl-fallback" aria-hidden="true"></div>
 
 <header class="site-header" id="top">
   <div class="wrap header-inner">
@@ -250,5 +260,6 @@
 </nav>
 
 <script src="script.js"></script>
+<script type="module" src="scene3d.js"></script>
 </body>
 </html>
