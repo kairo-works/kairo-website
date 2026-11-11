@@ -18,14 +18,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
-  }
-}
-</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -50,13 +42,9 @@
 </header>
 
 <main id="main">
-  <!-- REDESIGN (a1.gallery 3D-landing standard): the 3D fire pit is the HERO,
-       but it lives in its OWN zone — a stage band below the headline, backed
-       by a REAL campfire photograph. Text zone and 3D zone are separate
-       stacked blocks in normal flow, so no 3D object can ever cover a
-       headline, subtitle or button. The hero object is a real .glb model
-       ("Fire Pit 1" by CircuitZ, CC0, via Poly Pizza), loaded with
-       GLTFLoader — no code-drawn geometry. Backgrounds are real photos.
+  <!-- HERO: words first, then two real-photo bands in normal flow — a
+       night-campfire photograph and a grill photograph. No 3D, no canvas:
+       backgrounds are real photography only.
        Palette: flour-white #FAF6EF, ink #241B14, ember accent #B3341F. -->
 
   <!-- HERO -->
@@ -73,30 +61,12 @@
       <p class="hero-meta">Forty seats &middot; A counter for walk-ins &middot; Wines from small growers</p>
     </div>
 
-    <!-- Zone 2 — the real 3D fire pit, in its own stage. The canvas is a
-         child of this stage only (absolute inset 0, overflow hidden): it
-         can never leave this band, so it can never reach the text above
-         or below. Behind the canvas is a real campfire photograph — the
-         stage background is photography, never code-drawn art. If WebGL
-         or the model fails, the photograph alone still shows a real fire. -->
-    <div class="flame-stage" id="flame-stage" role="img"
-         aria-label="A three-dimensional stone fire pit with crossed logs, over a real campfire photograph">
-      <img class="stage-photo" src="https://images.unsplash.com/photo-1475738972911-5b44ce984c42?w=2400&q=80&auto=format&fit=crop" alt="" aria-hidden="true" width="2400" height="1600">
-      <canvas id="webgl" aria-hidden="true"></canvas>
-      <p class="flame-fallback">The fire pit is lit every morning.</p>
-    </div>
+    <!-- Zone 2 — a real night-campfire photograph, its own full-width band. -->
+    <figure class="hero-fire">
+      <img src="https://images.unsplash.com/photo-1475738972911-5b44ce984c42?w=2400&q=80&auto=format&fit=crop" alt="Embers glowing in a campfire at night" width="2400" height="1600" loading="lazy">
+    </figure>
 
-    <!-- Zone 3 — stage controls, in normal flow BELOW the stage. -->
-    <div class="wrap stage-bar">
-      <p class="stage-hint">Drag the fire pit to turn it &mdash; scroll and it turns with you.</p>
-      <div class="stage-views" role="group" aria-label="Fire pit views">
-        <button class="view-btn is-active" type="button" data-view="front" aria-pressed="true">Front</button>
-        <button class="view-btn" type="button" data-view="side" aria-pressed="false">Side</button>
-        <button class="view-btn" type="button" data-view="coals" aria-pressed="false">Coals</button>
-      </div>
-    </div>
-
-    <!-- Zone 4 — the grill photo, its own full-width band. -->
+    <!-- Zone 3 — the grill photo, its own full-width band. -->
     <figure class="hero-photo">
       <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=2400&q=80&auto=format&fit=crop" alt="Skewers grilling over open fire at Ember" width="2400" height="1600" fetchpriority="high">
     </figure>
@@ -289,7 +259,7 @@
       <a href="#visit">Visit</a>
       <a href="#book">Book a table</a>
     </nav>
-    <p class="footer-legal">Photographs: <a href="https://unsplash.com">Unsplash</a> · 3D fire pit: &ldquo;Fire Pit 1&rdquo; by <a href="https://poly.pizza/m/DsQslCOoz0">CircuitZ</a>, CC0 · <a href="mailto:bookings@ember.example">bookings@ember.example</a></p>
+    <p class="footer-legal">Photographs: <a href="https://unsplash.com">Unsplash</a> · <a href="mailto:bookings@ember.example">bookings@ember.example</a></p>
     <p class="footer-name" aria-hidden="true">EMBER</p>
   </div>
 </footer>
@@ -299,6 +269,5 @@
 </nav>
 
 <script src="script.js"></script>
-<script type="module" src="ember-3d.js"></script>
 </body>
 </html>

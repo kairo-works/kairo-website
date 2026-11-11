@@ -1,8 +1,8 @@
-/* Ember — wood-fired grill & bistro. Full redesign, a1.gallery 3D-landing standard.
+/* Ember — wood-fired grill & bistro.
    Palette: flour-white ground #FAF6EF, ink #241B14, ember accent #B3341F.
    Flat colour + real photography only. No gradients, no code-drawn art as
-   background imagery: the hero stage background is a real campfire photo
-   (<img class="stage-photo">), every section carries real photos.
+   background imagery: the hero bands are real photographs, and every
+   section carries real photos.
    Square corners throughout. */
 
 :root {
@@ -188,9 +188,8 @@ p { margin: 0; }
 .text-link:hover, .head-link:hover { text-decoration: none; color: var(--accent); }
 
 /* ---------- Hero ----------
-   Four separate stacked zones in normal flow. Zone 1 (words) and Zone 2
-   (the 3D stage) never share a box, so the 3D object cannot cover text —
-   this is structural, not a z-index trick. */
+   Three separate stacked zones in normal flow: words, a real campfire
+   photograph, and a real grill photograph. */
 .hero { padding-top: 72px; }
 
 /* Zone 1 — words only. Solid flour ground, no canvas anywhere near it. */
@@ -237,78 +236,16 @@ p { margin: 0; }
   color: var(--muted);
 }
 
-/* Zone 2 — the 3D stage. The canvas lives ONLY inside this box
-   (absolute inset 0, overflow hidden). Its background is a REAL campfire
-   photograph, not a drawn backdrop: the <img> fills the stage and the
-   transparent WebGL canvas sits on top of it. */
-.flame-stage {
-  position: relative;
-  overflow: hidden;
-  height: clamp(420px, 58vh, 620px);
-  background: var(--ink);
-}
-.stage-photo {
-  position: absolute;
-  inset: 0;
+/* Zone 2 — the night-campfire photograph, its own full-width band. */
+.hero-fire { margin: 0; }
+.hero-fire img {
   width: 100%;
-  height: 100%;
+  height: clamp(420px, 58vh, 620px);
   object-fit: cover;
   object-position: center 42%;
 }
-#webgl {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  touch-action: pan-y;
-}
-/* No-WebGL fallback caption: hidden unless the page reports no WebGL.
-   The campfire photograph behind it stays visible, so the stage is never
-   an empty box. Solid ink chip, no drawn art. */
-.flame-fallback {
-  display: none;
-  position: absolute;
-  left: 50%;
-  bottom: 16px;
-  transform: translateX(-50%);
-  margin: 0;
-  background: var(--ink);
-  color: var(--g-main);
-  font-weight: 600;
-  font-size: 15px;
-  padding: 10px 18px;
-  white-space: nowrap;
-}
-body.no-webgl .flame-fallback { display: block; }
-body.no-webgl #webgl { display: none; }
 
-/* Zone 3 — stage controls, in normal flow BELOW the stage. */
-.stage-bar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding-top: var(--s-3);
-  padding-bottom: var(--s-5);
-}
-.stage-hint { font-size: 15px; color: var(--muted); }
-.stage-views { display: flex; gap: 8px; }
-.view-btn {
-  min-height: 44px;
-  padding: 10px 18px;
-  font: 600 15px/1.25 var(--font-text);
-  color: var(--ink);
-  background: transparent;
-  border: 1px solid var(--g-line);
-  border-radius: var(--radius);
-  cursor: pointer;
-}
-.view-btn:hover { border-color: var(--ink); }
-.view-btn.is-active { background: var(--ink); color: var(--g-main); border-color: var(--ink); }
-
-/* Zone 4 — the grill photo, its own full-width band. */
+/* Zone 3 — the grill photo, its own full-width band. */
 .hero-photo { margin: 0; }
 .hero-photo img {
   width: 100%;
@@ -318,11 +255,11 @@ body.no-webgl #webgl { display: none; }
 }
 
 [data-enter] .hero-text,
-[data-enter] .flame-stage,
+[data-enter] .hero-fire,
 [data-enter] .hero-photo {
   animation: hero-enter 0.9s ease both;
 }
-[data-enter] .flame-stage { animation-delay: 0.12s; }
+[data-enter] .hero-fire { animation-delay: 0.12s; }
 [data-enter] .hero-photo { animation-delay: 0.2s; }
 @keyframes hero-enter {
   from { opacity: 0; transform: translateY(14px); }
@@ -564,6 +501,7 @@ main > section.hero { padding: 72px 0 0; }
 /* ---------- Responsive ---------- */
 @media (max-width: 1023px) {
   .hero-photo img { height: 56vw; max-height: 480px; }
+  .hero-fire img { height: 56vw; max-height: 480px; }
   .visit-split, .menu-grid, .about-split, .booking-split, .close-inner { grid-template-columns: 1fr; }
   .visit-photo img, .about-photo img, .booking-photo img { aspect-ratio: 16 / 9; }
   .menu-photos { grid-template-columns: 1fr 1fr; }
@@ -595,10 +533,8 @@ main > section.hero { padding: 72px 0 0; }
   .hero-text h1 { font-size: 44px; line-height: 1.05; }
   .hero-sub { font-size: 18px; line-height: 28px; }
   .hero-ctas .btn { width: 100%; }
-  .flame-stage { height: 400px; }
-  .stage-bar { flex-direction: column; align-items: stretch; }
-  .stage-views { justify-content: center; }
   .hero-photo img { height: auto; min-height: 292px; aspect-ratio: 4 / 3; }
+  .hero-fire img { height: 400px; }
   .type-moment { font-size: 48px; margin-bottom: 32px; }
   .visit-panel, .booking-form { padding: 24px; }
   .visit-cols { grid-template-columns: 1fr; }
@@ -619,5 +555,5 @@ main > section.hero { padding: 72px 0 0; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  [data-enter] .hero-text, [data-enter] .flame-stage, [data-enter] .hero-photo { opacity: 1; }
+  [data-enter] .hero-text, [data-enter] .hero-fire, [data-enter] .hero-photo { opacity: 1; }
 }

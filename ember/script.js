@@ -1,7 +1,5 @@
 /* Ember landing page — quiet interactions only:
-   mobile menu, phone action bar, booking form validation, and the
-   WebGL watchdog (shows the no-WebGL fallback if the 3D module never
-   reports in — e.g. the Three.js CDN is unreachable). */
+   mobile menu, phone action bar, and booking form validation. */
 (function () {
   "use strict";
 
@@ -109,14 +107,4 @@
       });
     });
   }
-
-  /* WebGL watchdog: the 3D module adds `webgl-on` to <body> once the
-     real .glb model has loaded and rendered. If that never happens
-     (CDN down, WebGL blocked, model missing), show the no-WebGL state
-     — the real campfire photograph stays as the stage background. */
-  setTimeout(function () {
-    if (!document.body.classList.contains("webgl-on")) {
-      document.body.classList.add("no-webgl");
-    }
-  }, 8000);
 })();
