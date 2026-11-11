@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-type="place" data-page-mode="full" data-buttons="solid" data-motion="on">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,18 +10,16 @@
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://www.socialexpat.net/wp-content/uploads/2024/02/Fold-Cafe-e1706863890133-1024x723.jpg">
 <meta name="theme-color" content="#FBF7F0">
-<meta name="page-type" content="place">
-<meta name="site-kind" content="other">
-<meta name="page-kind" content="place">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231E5B44'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23FBF7F0' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23B7791F'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23FBF7F0' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script type="importmap">
 {
   "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js"
+    "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
   }
 }
 </script>
@@ -29,14 +27,12 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
-<canvas id="webgl" aria-hidden="true"></canvas>
-<div class="webgl-fallback" aria-hidden="true"></div>
-
 <header class="site-header" id="top">
   <div class="wrap header-inner">
     <a class="brand" href="#top" aria-label="Fold Canggu — home">
       <span class="brand-mark" aria-hidden="true">F</span>
       <span class="brand-name">Fold</span>
+      <span class="brand-place">Canggu</span>
     </a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -52,72 +48,81 @@
 </header>
 
 <main id="main">
-  <!-- Plan: place page. Deal: nav-split, footer-visit, rhythm space, buttons solid, mark dots,
-       offer pair, place story, type moment address. Palette: warm cream ground #FBF7F0,
-       ink #2A2320, jade-green accent #1E5B44 — the colour of Fold's green-tiled house. -->
 
-  <!-- HERO -->
-  <section class="hero hero--photo" data-enter aria-labelledby="hero-title">
-    <figure class="hero-photo">
-      <img src="https://cdn.satlantis.io/location_photos/ANXAkqGhH0E12r0XuNydxJNTH7093QEx0-m_jVL1GTi1dxdexXfGM3ptYvjOXrRAKS2oEx3mBiKm5jIfwXT3xBaMXNnCAhQGmGtnPK4=s4800-w1536.jpg" alt="Fold's pastry counter under the green tiles" width="1536" height="866" fetchpriority="high">
-    </figure>
-    <div class="wrap hero-words">
-      <h1 id="hero-title">French pastry, baked at sunrise in Canggu</h1>
-      <div class="hero-side">
-        <p class="hero-sub">Butter croissants, sourdough and coffee from Chef Maxime Chené's artisan bakery — in the jade-green house on Jalan Nelayan. Open daily 7am – 6pm.</p>
-        <p class="hero-sub muted">★ 4.3 on TripAdvisor · Artisan bakery &amp; cafe</p>
+  <!-- HERO — a1.gallery rule, applied literally: huge centred type in its
+       own zone ABOVE, the 3D croissant in its own stage BELOW. The canvas
+       lives inside .hero-stage (in-flow, overflow hidden) and never
+       overlaps any text: there is no fixed/overlay canvas anywhere.
+       The stage background is a REAL PHOTO (bright café interior, Unsplash),
+       softened by a translucent cream veil so the golden model pops; the
+       3D object itself is a REAL scanned croissant (croissant.glb, Poly
+       Haven CC0) loaded with GLTFLoader — no procedural geometry. -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-text">
+      <p class="eyebrow">Artisan French bakery &middot; Canggu, Bali &middot; &#9733; 4.3 on TripAdvisor</p>
+      <h1 id="hero-title">French pastry,<br><em>baked at sunrise</em><br>in Canggu</h1>
+      <p class="hero-sub">Butter croissants, sourdough and coffee from Chef Maxime Chen&eacute;&rsquo;s artisan bakery &mdash; in the jade-green house on Jalan Nelayan. Open daily 7am &ndash; 6pm.</p>
+      <p class="hero-cta">
         <a class="btn btn--primary" href="#book">Order ahead</a>
-      </div>
+        <a class="btn btn--ghost" href="#menu">See the menu</a>
+      </p>
+      <p class="hero-meta">Daily 07:00 &ndash; 18:00 &nbsp;&middot;&nbsp; Jl. Nelayan No. 31 &nbsp;&middot;&nbsp; WhatsApp +62 877-7727-6634</p>
+    </div>
+
+    <div class="wrap">
+      <figure class="hero-stage-figure">
+        <div class="hero-stage" id="croissant-stage">
+          <canvas id="croissant-canvas" aria-hidden="true"></canvas>
+          <div class="hero-stage-fallback" aria-hidden="true">
+            <img src="https://neverneverlandinbali.com/wp-content/uploads/2023/04/F10.jpg" alt="" width="957" height="1493" loading="lazy">
+          </div>
+        </div>
+        <figcaption class="hero-stage-caption">The butter croissant &mdash; ~25k, baked through the morning. Scroll, and it turns.</figcaption>
+      </figure>
     </div>
   </section>
 
   <!-- VISIT -->
-  <section class="visit" id="visit" data-place="visit" aria-labelledby="visit-title">
+  <section class="visit" id="visit" aria-labelledby="visit-title">
     <div class="wrap">
-      <p class="type-moment"><a href="https://www.openstreetmap.org/search?query=Jl.%20Nelayan%20No.%2031%2C%20Canggu">Nelayan</a></p>
+      <p class="section-label">Visit</p>
+      <h2 id="visit-title">The green-tiled house<br>on Nelayan</h2>
       <div class="visit-split">
         <div class="visit-panel">
-          <h2 id="visit-title">Visit</h2>
-          <div class="visit-cols">
-            <div class="visit-address">
-              <p>Fold Canggu<br>Jl. Nelayan No. 31<br>Canggu 80361, Bali</p>
-              <a class="text-link" href="https://www.openstreetmap.org/search?query=Jl.%20Nelayan%20No.%2031%2C%20Canggu">See the area <span aria-hidden="true">&rarr;</span></a>
-            </div>
-            <div class="visit-hours">
-              <h3 class="t-label">Hours</h3>
-              <dl>
-                <div><dt>Daily</dt><dd>07:00 – 18:00</dd></div>
-              </dl>
-            </div>
-          </div>
-          <p class="visit-note">Dine in at the green-tiled bakery, take away a box of pastries, or order on GoFood. Also in Ubud and Sanur. Order ahead on WhatsApp — the morning croissants sell out.</p>
+          <p class="visit-address">Fold Canggu<br>Jl. Nelayan No. 31<br>Canggu 80361, Bali</p>
+          <a class="text-link" href="https://www.openstreetmap.org/search?query=Jl.%20Nelayan%20No.%2031%2C%20Canggu">See the area <span aria-hidden="true">&rarr;</span></a>
+          <dl class="visit-hours">
+            <div><dt>Daily</dt><dd>07:00 &ndash; 18:00</dd></div>
+          </dl>
+          <p class="visit-note">Dine in at the green-tiled bakery, take away a box of pastries, or order on GoFood. Also in Ubud and Sanur. Order ahead on WhatsApp &mdash; the morning croissants sell out.</p>
         </div>
-        <figure class="pl-photo visit-photo">
+        <figure class="photo visit-photo">
           <img src="https://www.socialexpat.net/wp-content/uploads/2024/02/Fold-Cafe-e1706863890133-1024x723.jpg" alt="Fold's jade-green tiled house on Jalan Nelayan at dusk" width="1024" height="723" loading="lazy">
         </figure>
       </div>
     </div>
   </section>
 
-  <!-- MENU / OFFER -->
+  <!-- MENU -->
   <section class="menu" id="menu" aria-labelledby="menu-title">
     <div class="wrap">
+      <p class="section-label">Menu</p>
       <div class="head-row">
         <h2 id="menu-title">From the counter</h2>
-        <a class="head-link" href="#about">Our story <span aria-hidden="true">&rarr;</span></a>
+        <p class="head-line">Prices in thousands of rupiah, approximate &mdash; the counter changes with the day&rsquo;s bake, so ask what is fresh. Coffee from ~30k a cup. Delivery on GoFood.</p>
       </div>
       <div class="menu-grid">
-        <div class="menu-groups" data-assumed>
+        <div class="menu-groups">
           <div class="menu-group">
             <h3 class="t-label">Viennoiserie</h3>
             <ul class="rows">
               <li><span class="row-name">Butter croissant</span><span class="row-desc">Flaky, golden, baked through the morning</span><span class="row-price">~25k</span></li>
-              <li><span class="row-name">Frangipane croissant</span><span class="row-desc">The must-order — almond cream, flaked almonds</span><span class="row-price">~40k</span></li>
+              <li><span class="row-name">Frangipane croissant</span><span class="row-desc">The must-order &mdash; almond cream, flaked almonds</span><span class="row-price">~40k</span></li>
               <li><span class="row-name">Pain au chocolat</span><span class="row-desc">Dark chocolate, laminated dough</span><span class="row-price">~27k</span></li>
               <li><span class="row-name">Ugly Pain Suisse</span><span class="row-desc">Vanilla custard, chocolate chips</span><span class="row-price">~35k</span></li>
-              <li><span class="row-name">Canelé</span><span class="row-desc">Caramelised crust, soft custard centre</span><span class="row-price">~30k</span></li>
+              <li><span class="row-name">Canel&eacute;</span><span class="row-desc">Caramelised crust, soft custard centre</span><span class="row-price">~30k</span></li>
               <li><span class="row-name">Swiss Danish</span><span class="row-desc">Custard and sultanas, flaky layers</span><span class="row-price">~35k</span></li>
-              <li><span class="row-name">Apple Roll</span><span class="row-desc">Crisp pastry, apple — a guest favourite</span><span class="row-price">~45k</span></li>
+              <li><span class="row-name">Apple Roll</span><span class="row-desc">Crisp pastry, apple &mdash; a guest favourite</span><span class="row-price">~45k</span></li>
               <li><span class="row-name">Mini croissants &amp; cereal</span><span class="row-desc">Mini croissants with cereal and milk</span><span class="row-price">~45k</span></li>
               <li><span class="row-name">Mango Rice Cloud</span><span class="row-desc">Milky rice, tropical compote, croissant dough</span><span class="row-price">~40k</span></li>
               <li><span class="row-name">Pistachio Bun</span><span class="row-desc">Custard &amp; cream pistachio</span><span class="row-price">~42k</span></li>
@@ -134,7 +139,7 @@
               <li><span class="row-name">Eggs Benedict with salmon</span><span class="row-desc">Crispy eggs Benedict, salmon, hollandaise</span><span class="row-price">~85k</span></li>
               <li><span class="row-name">Avocado croast</span><span class="row-desc">Avocado on croissant toast</span><span class="row-price">~70k</span></li>
               <li><span class="row-name">Goat cheese &amp; tomato confit</span><span class="row-desc">Goat cheese, tomato confit sandwich</span><span class="row-price">~75k</span></li>
-              <li><span class="row-name">Grilled cheese sandwich</span><span class="row-desc">Golden, melty — add an egg</span><span class="row-price">~65k</span></li>
+              <li><span class="row-name">Grilled cheese sandwich</span><span class="row-desc">Golden, melty &mdash; add an egg</span><span class="row-price">~65k</span></li>
             </ul>
           </div>
           <div class="menu-group">
@@ -152,28 +157,28 @@
           </div>
         </div>
         <div class="menu-photos">
-          <figure class="pl-photo">
+          <figure class="photo">
             <img src="https://static.bali.live/uploads/54294/responsive-images/AUc7tXWCAjuX6_VNW_BfHgjO-D28k_7GAuyqnprwr2ZvgdSqdNzaM2sRkcY4awSutyq3Dp1scS2wOum1eLA2A5Y7NBl357_u7aJXwfDdAefazNxc9La36q2tYO9tvGlSo6mYQKMVaHu9njLZIx0VkkgZsEVBOROmWQKMtOQOVGLCoq2BfL-Z___responsive_1200_1600.jpg" alt="Pastries in Fold's display case" width="1200" height="1600" loading="lazy">
           </figure>
-          <figure class="pl-photo">
+          <figure class="photo">
             <img src="https://neverneverlandinbali.com/wp-content/uploads/2023/04/F10.jpg" alt="Butter croissant and canelés at Fold" width="957" height="1493" loading="lazy">
           </figure>
         </div>
       </div>
-      <p class="menu-note" data-assumed>Prices in thousands of Indonesian rupiah, approximate — the counter changes with the day's bake, so ask what is fresh. Coffee from ~30k a cup. Delivery on GoFood.</p>
     </div>
   </section>
 
-  <!-- ABOUT / THE PLACE -->
+  <!-- ABOUT -->
   <section class="about" id="about" aria-labelledby="about-title">
     <div class="wrap about-split">
       <div class="about-text">
-        <h2 id="about-title">French pastry, Bali mornings</h2>
-        <p>Fold is an artisan bakery by Chef Maxime Chené, in the jade-green tiled house on Jalan Nelayan. French viennoiserie is at its core — croissants, canelés, sourdough — with breakfast plates, coffee and homemade gelato.</p>
-        <p>Come for a slow breakfast, a box of pastries to take home, or a coffee at the counter — kids get the Lego corner. It is the original Canggu bakery, with sister spots in Ubud and Sanur.</p>
+        <p class="section-label">About</p>
+        <h2 id="about-title">French pastry,<br>Bali mornings</h2>
+        <p>Fold is an artisan bakery by Chef Maxime Chen&eacute;, in the jade-green tiled house on Jalan Nelayan. French viennoiserie is at its core &mdash; croissants, canel&eacute;s, sourdough &mdash; with breakfast plates, coffee and homemade gelato.</p>
+        <p>Come for a slow breakfast, a box of pastries to take home, or a coffee at the counter. Upstairs, the air-conditioned loft is a cool, quiet corner &mdash; and kids get the Lego corner. It is the original Canggu bakery, with sister spots in Ubud and Sanur.</p>
         <a class="text-link" href="#gallery">See the room and the bakes <span aria-hidden="true">&rarr;</span></a>
       </div>
-      <figure class="pl-photo about-photo">
+      <figure class="photo about-photo">
         <img src="https://neverneverlandinbali.com/wp-content/uploads/2023/04/F11.jpg" alt="Fold's bakes, stacked high" width="957" height="1493" loading="lazy">
       </figure>
     </div>
@@ -182,15 +187,19 @@
   <!-- GALLERY + TESTIMONIALS -->
   <section class="gallery" id="gallery" aria-labelledby="gallery-title">
     <div class="wrap">
+      <p class="section-label">Gallery</p>
       <div class="head-row">
         <h2 id="gallery-title">The room and the bakes</h2>
         <a class="head-link" href="#book">Order ahead <span aria-hidden="true">&rarr;</span></a>
       </div>
+      <figure class="photo gallery-lead">
+        <img src="https://cdn.satlantis.io/location_photos/ANXAkqGhH0E12r0XuNydxJNTH7093QEx0-m_jVL1GTi1dxdexXfGM3ptYvjOXrRAKS2oEx3mBiKm5jIfwXT3xBaMXNnCAhQGmGtnPK4=s4800-w1536.jpg" alt="Fold's pastry counter under the green tiles" width="1536" height="866" loading="lazy">
+      </figure>
       <div class="gallery-wall">
-        <figure class="pl-photo"><img src="https://neverneverlandinbali.com/wp-content/uploads/2023/04/F7-1280x1600.jpg" alt="A butter croissant at Fold" width="1280" height="1600" loading="lazy"></figure>
-        <figure class="pl-photo"><img src="https://d2zmqyh8caa94h.cloudfront.net/place_photos_new/ChIJg1ad-75H0i0R8aB_K9oKYj8/ChIJg1ad-75H0i0R8aB_K9oKYj8_0.jpg" alt="Mango Rice Cloud and Pistachio Bun in Fold's display case" width="600" height="800" loading="lazy"></figure>
-        <figure class="pl-photo"><img src="https://neverneverlandinbali.com/wp-content/uploads/2023/04/Snapinsta.app_328311343_744927610639479_2950613244992388589_n_1080.jpg" alt="A pile of Fold's pastries" width="1080" height="1080" loading="lazy"></figure>
-        <figure class="pl-photo"><img src="https://neverneverlandinbali.com/wp-content/uploads/2023/04/Snapinsta.app_332271894_2385766928266925_2805824659137808460_n_1080-1.jpg" alt="A heart-shaped pastry at Fold" width="1080" height="1350" loading="lazy"></figure>
+        <figure class="photo"><img src="https://neverneverlandinbali.com/wp-content/uploads/2023/04/F7-1280x1600.jpg" alt="A butter croissant at Fold" width="1280" height="1600" loading="lazy"></figure>
+        <figure class="photo"><img src="https://d2zmqyh8caa94h.cloudfront.net/place_photos_new/ChIJg1ad-75H0i0R8aB_K9oKYj8/ChIJg1ad-75H0i0R8aB_K9oKYj8_0.jpg" alt="Mango Rice Cloud and Pistachio Bun in Fold's display case" width="600" height="800" loading="lazy"></figure>
+        <figure class="photo"><img src="https://neverneverlandinbali.com/wp-content/uploads/2023/04/Snapinsta.app_328311343_744927610639479_2950613244992388589_n_1080.jpg" alt="A pile of Fold's pastries" width="1080" height="1080" loading="lazy"></figure>
+        <figure class="photo"><img src="https://neverneverlandinbali.com/wp-content/uploads/2023/04/Snapinsta.app_332271894_2385766928266925_2805824659137808460_n_1080-1.jpg" alt="A heart-shaped pastry at Fold" width="1080" height="1350" loading="lazy"></figure>
       </div>
       <div class="voices" id="voices" aria-labelledby="voices-title">
         <h2 id="voices-title">What guests say</h2>
@@ -218,15 +227,16 @@
   <!-- BOOKING -->
   <section class="booking" id="book" aria-labelledby="book-title">
     <div class="wrap">
+      <p class="section-label">Order ahead</p>
       <div class="head-row">
         <h2 id="book-title">Book a table or order ahead</h2>
         <p class="head-line">We reply on WhatsApp within the day.</p>
       </div>
       <div class="booking-split">
-        <figure class="pl-photo booking-photo">
+        <figure class="photo booking-photo">
           <img src="https://neverneverlandinbali.com/wp-content/uploads/2023/04/F6-1280x1280.jpg" alt="Fresh bread at Fold" width="1280" height="1280" loading="lazy">
         </figure>
-        <form class="form booking-form" action="https://wa.me/6287777276634" method="get" data-endpoint="" data-sent="Opening WhatsApp…" novalidate>
+        <form class="form booking-form" action="https://wa.me/6287777276634" method="get" data-endpoint="" data-sent="Opening WhatsApp&hellip;" novalidate>
           <div class="field">
             <label for="f-name">Name</label>
             <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="f-name-err">
@@ -246,7 +256,7 @@
           </div>
           <div class="btn-row"><button class="btn btn--primary" type="submit">Order on WhatsApp</button></div>
           <p class="form__status" role="status" data-form-status></p>
-          <p class="t-small muted">Or message us directly on WhatsApp: +62 877-7727-6634. For big orders — boxes of pastries, events — message us directly.</p>
+          <p class="t-small muted">Or message us directly on WhatsApp: +62 877-7727-6634. For big orders &mdash; boxes of pastries, events &mdash; message us directly.</p>
         </form>
       </div>
     </div>
@@ -257,10 +267,10 @@
     <div class="wrap close-inner">
       <div class="close-text">
         <h2 id="close-title">Come hungry. The croissants come out warm.</h2>
-        <p>Open daily 7am – 6pm, on Jalan Nelayan, Canggu. Also in Ubud and Sanur.</p>
+        <p>Open daily 7am &ndash; 6pm, on Jalan Nelayan, Canggu. Also in Ubud and Sanur.</p>
         <a class="btn btn--primary" href="#book">Order ahead</a>
       </div>
-      <figure class="pl-photo close-photo">
+      <figure class="photo close-photo">
         <img src="https://neverneverlandinbali.com/wp-content/uploads/2023/04/Snapinsta.app_328335032_230275879357476_93336008614663302_n_1080.jpg" alt="A handprint in flour at Fold" width="1080" height="1080" loading="lazy">
       </figure>
     </div>
@@ -271,7 +281,7 @@
 <footer class="site-footer" id="contact">
   <div class="wrap">
     <p class="footer-address"><a href="https://www.openstreetmap.org/search?query=Jl.%20Nelayan%20No.%2031%2C%20Canggu">Fold Canggu, Jl. Nelayan No. 31, Canggu</a></p>
-    <p class="footer-hours">Daily 07:00 – 18:00 · WhatsApp +62 877-7727-6634 · <a href="https://www.instagram.com/fold.bali">@fold.bali</a> · <a href="mailto:hello@foldbali.com">hello@foldbali.com</a></p>
+    <p class="footer-hours">Daily 07:00 &ndash; 18:00 &middot; WhatsApp +62 877-7727-6634 &middot; <a href="https://www.instagram.com/fold.bali">@fold.bali</a> &middot; <a href="mailto:hello@foldbali.com">hello@foldbali.com</a></p>
     <nav class="footer-nav" aria-label="Footer">
       <a href="#menu">Menu</a>
       <a href="#about">About</a>
@@ -279,7 +289,7 @@
       <a href="#visit">Visit</a>
       <a href="#book">Order ahead</a>
     </nav>
-    <p class="footer-legal">Photos: real photos of Fold Canggu from public web sources (Never Never Land in Bali, Social Expat, Bali.live, DocentPro, Satlantis) — shown for illustration in this preview; Fold&rsquo;s own photos will replace them on the live site · Reviews: TripAdvisor · Demo preview by <a href="https://github.com/kairo-works">Kairo</a></p>
+    <p class="footer-legal">Photos: real photos of Fold Canggu from public web sources (Never Never Land in Bali, Social Expat, Bali.live, DocentPro, Satlantis) &mdash; shown for illustration in this preview; Fold&rsquo;s own photos will replace them on the live site &middot; Background photos: Unsplash &middot; 3D croissant: a real scan by Greg Zaal &amp; Dario Barresi, Poly Haven (CC0) &middot; Reviews: TripAdvisor &middot; Demo preview by <a href="https://github.com/kairo-works">Kairo</a></p>
     <p class="footer-name" aria-hidden="true">FOLD</p>
   </div>
 </footer>
@@ -289,6 +299,13 @@
 </nav>
 
 <script src="script.js"></script>
+<script>
+/* If the 3D module (Three.js CDN) never loads at all, show the real-photo
+   stage fallback instead of an empty stage. */
+setTimeout(function () {
+  if (!document.body.classList.contains('webgl-on')) document.body.classList.add('no-webgl');
+}, 6000);
+</script>
 <script type="module" src="fold-3d.js"></script>
 </body>
 </html>
