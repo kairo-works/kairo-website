@@ -1,6 +1,9 @@
-/* Ember — wood-fired grill & bistro. Place page.
-   Palette (dealt for the trade): flour-white ground, warm ink, ember accent —
-   the terracotta of a bread oven's tiles. Flat colour only, square corners. */
+/* Ember — wood-fired grill & bistro. Full redesign, a1.gallery 3D-landing standard.
+   Palette: flour-white ground #FAF6EF, ink #241B14, ember accent #B3341F.
+   Flat colour + real photography only. No gradients, no code-drawn art as
+   background imagery: the hero stage background is a real campfire photo
+   (<img class="stage-photo">), every section carries real photos.
+   Square corners throughout. */
 
 :root {
   --g-main: #faf6ef;
@@ -11,7 +14,6 @@
   --accent: #b3341f;
   --accent-hover: #9c2d1b;
   --accent-ink: #ffffff;
-  --gold: #a16207;
   --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
   --font-text: "Karla", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
   --wrap: 1200px;
@@ -31,6 +33,11 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  /* Reserve room for the fixed header when jumping to anchors. */
+  scroll-padding-top: 88px;
+  /* Reserve room for the phone action bar so anchored content is never
+     hidden behind it. */
+  scroll-padding-bottom: 96px;
 }
 
 body {
@@ -125,13 +132,10 @@ p { margin: 0; }
   font-weight: 500;
   font-size: 16px;
   padding: 8px 0;
-  background-image: linear-gradient(currentColor, currentColor);
-  background-size: 0% 2px;
-  background-repeat: no-repeat;
-  background-position: left calc(100% - 2px);
-  transition: background-size 0.25s ease;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.25s ease;
 }
-.site-nav a:not(.btn):hover { text-decoration: none; background-size: 100% 2px; }
+.site-nav a:not(.btn):hover { text-decoration: none; border-bottom-color: var(--ink); }
 .menu-toggle {
   display: none;
   background: none;
@@ -165,6 +169,12 @@ p { margin: 0; }
 .btn--primary { background: var(--accent); color: var(--accent-ink); }
 .btn--primary:hover { background: var(--accent-hover); text-decoration: none; transform: translateY(-1px); }
 .btn--primary:active { transform: translateY(1px); }
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+}
+.btn--ghost:hover { background: var(--ink); color: var(--g-main); text-decoration: none; }
 .btn-row { margin-top: var(--s-3); }
 
 /* ---------- Text links ---------- */
@@ -177,37 +187,143 @@ p { margin: 0; }
 .text-link:hover span, .head-link:hover span { transform: translateX(3px); }
 .text-link:hover, .head-link:hover { text-decoration: none; color: var(--accent); }
 
-/* ---------- Hero (place hero: photo bare, words on the ground below) ---------- */
+/* ---------- Hero ----------
+   Four separate stacked zones in normal flow. Zone 1 (words) and Zone 2
+   (the 3D stage) never share a box, so the 3D object cannot cover text —
+   this is structural, not a z-index trick. */
 .hero { padding-top: 72px; }
+
+/* Zone 1 — words only. Solid flour ground, no canvas anywhere near it. */
+.hero-text {
+  text-align: center;
+  padding-top: clamp(48px, 7vw, 96px);
+  padding-bottom: clamp(40px, 5vw, 64px);
+}
+.hero-eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--s-3);
+}
+.hero-text h1 {
+  font-size: clamp(44px, 7.2vw, 104px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  max-width: 960px;
+  margin-inline: auto;
+}
+.hero-sub {
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.45;
+  max-width: 560px;
+  margin: var(--s-3) auto 0;
+  color: var(--muted);
+}
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: var(--s-4);
+}
+.hero-meta {
+  margin-top: var(--s-3);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Zone 2 — the 3D stage. The canvas lives ONLY inside this box
+   (absolute inset 0, overflow hidden). Its background is a REAL campfire
+   photograph, not a drawn backdrop: the <img> fills the stage and the
+   transparent WebGL canvas sits on top of it. */
+.flame-stage {
+  position: relative;
+  overflow: hidden;
+  height: clamp(420px, 58vh, 620px);
+  background: var(--ink);
+}
+.stage-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+}
+#webgl {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: pan-y;
+}
+/* No-WebGL fallback caption: hidden unless the page reports no WebGL.
+   The campfire photograph behind it stays visible, so the stage is never
+   an empty box. Solid ink chip, no drawn art. */
+.flame-fallback {
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  margin: 0;
+  background: var(--ink);
+  color: var(--g-main);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 10px 18px;
+  white-space: nowrap;
+}
+body.no-webgl .flame-fallback { display: block; }
+body.no-webgl #webgl { display: none; }
+
+/* Zone 3 — stage controls, in normal flow BELOW the stage. */
+.stage-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: var(--s-3);
+  padding-bottom: var(--s-5);
+}
+.stage-hint { font-size: 15px; color: var(--muted); }
+.stage-views { display: flex; gap: 8px; }
+.view-btn {
+  min-height: 44px;
+  padding: 10px 18px;
+  font: 600 15px/1.25 var(--font-text);
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--g-line);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.view-btn:hover { border-color: var(--ink); }
+.view-btn.is-active { background: var(--ink); color: var(--g-main); border-color: var(--ink); }
+
+/* Zone 4 — the grill photo, its own full-width band. */
 .hero-photo { margin: 0; }
 .hero-photo img {
   width: 100%;
-  height: 480px;
+  height: clamp(320px, 52vw, 560px);
   object-fit: cover;
   object-position: center;
 }
-.hero-words {
-  display: grid;
-  grid-template-columns: 6fr 6fr;
-  gap: var(--s-3);
-  padding-top: 40px;
-  padding-bottom: 56px;
-  align-items: start;
-}
-.hero-words h1 {
-  font-size: 48px;
-  line-height: 53px;
-  letter-spacing: -0.01em;
-  max-width: 560px;
-}
-.hero-sub { font-size: 20px; line-height: 30px; max-width: 480px; }
-.hero-side .btn { margin-top: 24px; }
 
-[data-enter] .hero-photo,
-[data-enter] .hero-words {
+[data-enter] .hero-text,
+[data-enter] .flame-stage,
+[data-enter] .hero-photo {
   animation: hero-enter 0.9s ease both;
 }
-[data-enter] .hero-words { animation-delay: 0.12s; }
+[data-enter] .flame-stage { animation-delay: 0.12s; }
+[data-enter] .hero-photo { animation-delay: 0.2s; }
 @keyframes hero-enter {
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: translateY(0); }
@@ -215,6 +331,7 @@ p { margin: 0; }
 
 /* ---------- Sections ---------- */
 main > section { padding: var(--s-7) 0; }
+main > section.hero { padding: 72px 0 0; }
 .head-row {
   display: flex;
   align-items: baseline;
@@ -421,7 +538,13 @@ main > section { padding: var(--s-7) 0; }
   user-select: none;
 }
 
-/* ---------- Phone action bar ---------- */
+/* ---------- Phone action bar ----------
+   Fix for the old defect (bar covering a line of text while scrolling):
+   1. The bar is hidden WHILE the user is scrolling (.is-scrolling) and
+      only appears 500 ms after scrolling stops.
+   2. It never shows while the booking section or the footer is visible.
+   3. On phones the footer carries extra bottom padding, so the last line
+      of footer text always clears the bar. */
 .actionbar {
   position: fixed;
   left: 0;
@@ -435,13 +558,12 @@ main > section { padding: var(--s-7) 0; }
   transition: transform 0.3s ease;
 }
 .actionbar.visible { transform: translateY(0); }
+.actionbar.is-scrolling { transform: translateY(110%); }
 .actionbar .btn { width: 100%; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1023px) {
   .hero-photo img { height: 56vw; max-height: 480px; }
-  .hero-words { grid-template-columns: 1fr; padding-top: 32px; }
-  .hero-words h1 { font-size: 40px; line-height: 44px; }
   .visit-split, .menu-grid, .about-split, .booking-split, .close-inner { grid-template-columns: 1fr; }
   .visit-photo img, .about-photo img, .booking-photo img { aspect-ratio: 16 / 9; }
   .menu-photos { grid-template-columns: 1fr 1fr; }
@@ -451,6 +573,7 @@ main > section { padding: var(--s-7) 0; }
 @media (max-width: 767px) {
   :root { --gut: 24px; }
   main > section { padding: 64px 0; }
+  main > section.hero { padding-top: 72px; }
   .site-nav {
     display: none;
     position: absolute;
@@ -468,11 +591,14 @@ main > section { padding: var(--s-7) 0; }
   .site-nav a:not(.btn) { padding: 14px 0; border-bottom: 1px solid var(--g-line); }
   .site-nav .nav-cta { margin-top: 16px; width: 100%; }
   .menu-toggle { display: block; }
-  .hero-photo img { height: auto; min-height: 292px; aspect-ratio: 4 / 3; }
-  .hero-words { padding-top: 24px; padding-bottom: 40px; }
-  .hero-words h1 { font-size: 32px; line-height: 37px; }
+  .hero-text { padding-top: 48px; padding-bottom: 40px; }
+  .hero-text h1 { font-size: 44px; line-height: 1.05; }
   .hero-sub { font-size: 18px; line-height: 28px; }
-  .hero-side .btn { width: 100%; }
+  .hero-ctas .btn { width: 100%; }
+  .flame-stage { height: 400px; }
+  .stage-bar { flex-direction: column; align-items: stretch; }
+  .stage-views { justify-content: center; }
+  .hero-photo img { height: auto; min-height: 292px; aspect-ratio: 4 / 3; }
   .type-moment { font-size: 48px; margin-bottom: 32px; }
   .visit-panel, .booking-form { padding: 24px; }
   .visit-cols { grid-template-columns: 1fr; }
@@ -485,32 +611,13 @@ main > section { padding: var(--s-7) 0; }
   .head-row .btn { width: auto; }
   .close-text { order: 1; }
   .close-photo { order: 2; }
+  /* Last line of the page always clears the action bar. */
+  .site-footer { padding-bottom: 120px; }
 }
-
-/* ---------- 3D enhancement layer (ember flame over the hero photo) ---------- */
-/* Fixed canvas layered between the hero photo and the text chrome: the page
-   is opaque (full-bleed hero photo + flour ground), so a canvas behind the
-   DOM would never be seen. The flame reads as fire rising from the grill
-   photo; it fades out as the hero scrolls away and never overlaps copy.
-   Pointer-events off, below the fixed header (z-index 100), the phone
-   action bar (90) and the skip link (200). */
-#webgl {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  z-index: 1;
-  pointer-events: none;
-}
-/* No-WebGL fallback: without 3D the page is the original page, fully
-   readable, so the fallback stays hidden. It exists for pattern parity
-   with homepage-3d. */
-.webgl-fallback { display: none; }
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  [data-enter] .hero-photo, [data-enter] .hero-words { opacity: 1; }
+  [data-enter] .hero-text, [data-enter] .flame-stage, [data-enter] .hero-photo { opacity: 1; }
 }

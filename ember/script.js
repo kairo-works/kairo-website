@@ -1,5 +1,7 @@
 /* Ember landing page — quiet interactions only:
-   mobile menu, phone action bar, booking form validation. */
+   mobile menu, phone action bar, booking form validation, and the
+   WebGL watchdog (shows the no-WebGL fallback if the 3D module never
+   reports in — e.g. the Three.js CDN is unreachable). */
 (function () {
   "use strict";
 
@@ -19,16 +21,24 @@
     });
   }
 
-  /* Phone action bar: show once the hero button has scrolled away,
-     hide on any screen that already shows a booking action. */
+  /* Phone action bar: show only once the hero CTA has scrolled away,
+     the booking section is NOT visible, the footer is NOT visible, and
+     the user has STOPPED scrolling for 500 ms. While scrolling the bar
+     is hidden, so it can never cover a line of text mid-scroll. */
   var bar = document.querySelector(".actionbar");
-  var heroBtn = document.querySelector(".hero-side .btn");
+  var heroBtn = document.querySelector(".hero-ctas .btn--primary");
   var book = document.getElementById("book");
+  var footer = document.querySelector(".site-footer");
   if (bar && heroBtn && "IntersectionObserver" in window) {
     var heroGone = false;
     var bookVisible = false;
+    var footerVisible = false;
+    var scrolling = false;
+    var scrollTimer = null;
     var update = function () {
-      bar.classList.toggle("visible", heroGone && !bookVisible);
+      var show = heroGone && !bookVisible && !footerVisible && !scrolling;
+      bar.classList.toggle("visible", show);
+      bar.classList.toggle("is-scrolling", scrolling);
     };
     new IntersectionObserver(function (entries) {
       heroGone = !entries[0].isIntersecting;
@@ -40,6 +50,21 @@
         update();
       }, { threshold: 0.05 }).observe(book);
     }
+    if (footer) {
+      new IntersectionObserver(function (entries) {
+        footerVisible = entries[0].isIntersecting;
+        update();
+      }, { threshold: 0.02 }).observe(footer);
+    }
+    window.addEventListener("scroll", function () {
+      scrolling = true;
+      update();
+      if (scrollTimer) clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(function () {
+        scrolling = false;
+        update();
+      }, 500);
+    }, { passive: true });
   }
 
   /* Booking form: validate each field, error under its own field,
@@ -84,4 +109,14 @@
       });
     });
   }
+
+  /* WebGL watchdog: the 3D module adds `webgl-on` to <body> once the
+     real .glb model has loaded and rendered. If that never happens
+     (CDN down, WebGL blocked, model missing), show the no-WebGL state
+     — the real campfire photograph stays as the stage background. */
+  setTimeout(function () {
+    if (!document.body.classList.contains("webgl-on")) {
+      document.body.classList.add("no-webgl");
+    }
+  }, 8000);
 })();
