@@ -487,6 +487,27 @@ main > section { padding: var(--s-7) 0; }
   .close-photo { order: 2; }
 }
 
+/* ---------- 3D enhancement layer (ember flame over the hero photo) ---------- */
+/* Fixed canvas layered between the hero photo and the text chrome: the page
+   is opaque (full-bleed hero photo + flour ground), so a canvas behind the
+   DOM would never be seen. The flame reads as fire rising from the grill
+   photo; it fades out as the hero scrolls away and never overlaps copy.
+   Pointer-events off, below the fixed header (z-index 100), the phone
+   action bar (90) and the skip link (200). */
+#webgl {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 1;
+  pointer-events: none;
+}
+/* No-WebGL fallback: without 3D the page is the original page, fully
+   readable, so the fallback stays hidden. It exists for pattern parity
+   with homepage-3d. */
+.webgl-fallback { display: none; }
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
