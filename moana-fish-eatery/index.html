@@ -15,14 +15,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
-  }
-}
-</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -48,24 +40,18 @@
 
 <main id="main">
   <!--
-    REDESIGN (Nov 2026), after a1.gallery 3D-landing collection:
-    huge type, one accent (ocean teal), generous whitespace, and a REAL
-    3D fish model as the HERO in its own stage — never behind text.
-    The stage background is a REAL ocean photo (Unsplash); the fish is
-    a REAL .glb/.gltf model (Barramundi Fish, CC0). No code-drawn
-    backgrounds, no procedural hero geometry.
-    STRUCTURAL GUARANTEE: the hero is two sibling blocks in normal flow —
-    a text zone on solid flour-white, then a full-bleed 3D stage band.
-    The <canvas> is absolutely positioned INSIDE .hero-stage
-    (position:relative; overflow:hidden), so it can only ever paint
-    inside that band. No fixed canvas, no canvas behind any copy.
-    The old defect (teal wave behind the subtitle, crest across the
-    headline) is impossible by construction, at any viewport width.
+    REDESIGN (Nov 2026), after the a1.gallery landing collection:
+    huge type, one accent (ocean teal), generous whitespace, and a
+    REAL ocean photo as the hero image — never behind text.
+    The hero is two sibling blocks in normal flow — a text zone on
+    solid flour-white, then a full-bleed real-photo band.
+    Backgrounds are real photography only; no gradients, no
+    code-drawn art anywhere as background.
   -->
 
   <!-- HERO -->
   <section class="hero" aria-labelledby="hero-title">
-    <!-- Zone 1 — text. Solid flour ground, no 3D anywhere near it. -->
+    <!-- Zone 1 — text. Solid flour ground. -->
     <div class="wrap hero-text" data-enter>
       <p class="hero-eyebrow">Canggu &middot; Batu Bolong &middot; Polynesian seafood</p>
       <h1 id="hero-title">Polynesian seafood,<br>on <em>Batu&nbsp;Bolong</em></h1>
@@ -78,14 +64,12 @@
       <p class="hero-meta">Daily 09:00 – 23:00 &middot; Jl. Pantai Batu Bolong No. 28 &middot; WhatsApp +62 812-3815-8373</p>
     </div>
 
-    <!-- Zone 2 — the 3D hero stage. A REAL fish model (Barramundi Fish,
-         CC0, Khronos glTF-Sample-Assets) leaps over a REAL ocean photo
-         (Unsplash). The 3D lives ONLY here. -->
-    <div class="hero-stage" id="hero-stage" aria-label="3D barramundi fish leaping over a real ocean photo — decorative">
-      <canvas id="webgl" aria-hidden="true"></canvas>
-    </div>
-
-    <p class="wrap hero-scroll" aria-hidden="true">Scroll — the fish turns as you go &darr; &middot; Ocean photo: Unsplash</p>
+    <!-- Zone 2 — hero photo. A REAL ocean photo (Unsplash),
+         full-bleed below the text. -->
+    <figure class="hero-photo">
+      <img src="https://images.unsplash.com/photo-1439405326854-014607f694d7?q=80&amp;w=1920&amp;auto=format&amp;fit=crop" alt="Ocean waves off the Bali coast" width="1920" height="1280" fetchpriority="high">
+      <figcaption class="wrap">Ocean photo: Unsplash</figcaption>
+    </figure>
   </section>
 
   <!-- VISIT -->
@@ -277,7 +261,7 @@
       <a href="#visit">Visit</a>
       <a href="#book">Book a table</a>
     </nav>
-    <p class="footer-legal">Photos: Moana Fish Eatery on Instagram (<a href="https://www.instagram.com/moana.bali">@moana.bali</a>) · <a href="https://www.facebook.com/1744180662497753">Facebook</a> · Ocean photo: Unsplash · 3D fish: “Barramundi Fish” model (CC0, Microsoft 2017) via Khronos glTF-Sample-Assets · Demo preview by <a href="https://github.com/kairo-works">Kairo</a></p>
+    <p class="footer-legal">Photos: Moana Fish Eatery on Instagram (<a href="https://www.instagram.com/moana.bali">@moana.bali</a>) · <a href="https://www.facebook.com/1744180662497753">Facebook</a> · Ocean photo: Unsplash · Demo preview by <a href="https://github.com/kairo-works">Kairo</a></p>
     <p class="footer-name" aria-hidden="true">MOANA</p>
   </div>
 </footer>
@@ -287,6 +271,5 @@
 </nav>
 
 <script src="script.js"></script>
-<script type="module" src="scene3d.js"></script>
 </body>
 </html>

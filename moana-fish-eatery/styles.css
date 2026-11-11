@@ -1,12 +1,11 @@
 /* Moana Fish Eatery — Polynesian seafood. Full redesign, Nov 2026.
-   After the a1.gallery 3D-landing collection: huge confident type, one
-   accent (ocean teal), generous whitespace, and a REAL 3D fish model as
-   the hero in its own stage over a REAL ocean photo.
-   BACKGROUNDS ARE REAL PHOTOGRAPHY ONLY: the hero stage is a real
+   After the a1.gallery landing collection: huge confident type, one
+   accent (ocean teal), generous whitespace, and a REAL ocean photo
+   as the hero image.
+   BACKGROUNDS ARE REAL PHOTOGRAPHY ONLY: the hero band is a real
    Unsplash ocean photo; every other picture is a real restaurant photo.
    No gradients, no shapes, no code-drawn art anywhere as background.
-   Flat solid colours are the only non-photo ground. The 3D fish is a
-   real .gltf model (Barramundi Fish, CC0) — see scene3d.js. */
+   Flat solid colours are the only non-photo ground. */
 
 :root {
   --g-main: #faf6ef;
@@ -196,11 +195,10 @@ p { margin: 0; }
 .text-link:hover, .head-link:hover { text-decoration: none; color: var(--accent); }
 
 /* ---------- Hero ----------
-   TWO SEPARATE ZONES, stacked in normal flow — this is the guarantee:
+   TWO SEPARATE ZONES, stacked in normal flow:
    Zone 1 (.hero-text) is plain text on solid flour-white. Zone 2
-   (.hero-stage) is the 3D band. The canvas is absolutely positioned
-   INSIDE .hero-stage (relative + overflow hidden), so it can only
-   paint inside that band. No text can ever meet a 3D object. */
+   (.hero-photo) is the full-bleed real ocean photo. No text can
+   ever meet the photo. */
 .hero { padding-top: 72px; }
 .hero-text {
   padding-top: clamp(48px, 7vw, 88px);
@@ -249,40 +247,17 @@ p { margin: 0; }
   margin-top: var(--s-3);
 }
 
-/* Zone 2 — the 3D stage. Background = REAL ocean photo (Unsplash,
-   verified HTTP 200). A flat translucent deep-teal tint (::before)
-   calms the photo so the pale 3D fish reads clearly against it.
-   The tint is a flat colour, not a gradient. If WebGL or the model
-   fails, the canvas hides and the real photo simply stays. */
-.hero-stage {
-  position: relative;
-  overflow: hidden;
+/* Zone 2 — the hero photo. A REAL ocean photo (Unsplash,
+   verified HTTP 200), full-bleed below the text. No gradients:
+   the photo itself is the background. */
+.hero-photo { margin: 0; }
+.hero-photo img {
   width: 100%;
   height: clamp(420px, 58vh, 620px);
-  background-color: var(--deep);
-  background-image: url("https://images.unsplash.com/photo-1439405326854-014607f694d7?q=80&w=1920&auto=format&fit=crop");
-  background-size: cover;
-  background-position: center 62%;
-  background-repeat: no-repeat;
+  object-fit: cover;
+  object-position: center 62%;
 }
-.hero-stage::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: rgba(3, 42, 40, 0.38);
-  pointer-events: none;
-}
-#webgl {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  display: block;
-  pointer-events: none;
-}
-.hero-scroll {
+.hero-photo figcaption {
   padding-top: var(--s-2);
   padding-bottom: var(--s-5);
   font-size: 14px;
@@ -547,8 +522,8 @@ main > section.hero { padding-top: 72px; padding-bottom: 0; }
   .hero-text h1 { font-size: 46px; line-height: 1.02; }
   .hero-sub { font-size: 18px; line-height: 28px; }
   .hero-cta .btn { flex: 1 1 100%; }
-  /* Mobile: text zone on top, 3D stage below it — still separate blocks. */
-  .hero-stage { height: 380px; }
+  /* Mobile: text zone on top, photo band below it — still separate blocks. */
+  .hero-photo img { height: 380px; }
   .type-moment { font-size: 48px; margin-bottom: 32px; }
   .visit-panel, .booking-form { padding: 24px; }
   .visit-cols { grid-template-columns: 1fr; }
