@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-type="place" data-page-mode="full" data-buttons="solid" data-motion="on">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,27 +10,22 @@
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://scontent-lax3-1.xx.fbcdn.net/v/t39.30808-6/471679573_3812486599000472_5987471764500415242_n.jpg?_nc_cat=104&amp;ccb=1-7&amp;_nc_sid=957871&amp;_nc_aid=0&amp;_nc_ohc=0Q9ChGR9XzQQ7kNvwHwWgzg&amp;_nc_oc=Adrf5XIsqhWJU-uz1X8W5ei_8qkCuoCxPqvc98d-oYBD7awBvLwBheDmJTdQbgbeZkMGm285ShIYSos_aaUFRB7G&amp;_nc_zt=23&amp;_nc_ht=scontent-lax3-1.xx&amp;_nc_gid=cVNdiQFwsfUeG4c42mKzrA&amp;oh=00_AQRBy6S_9sGH3PM9nMcUEnu0Ep1H_Qsh9PRr6sSd-CclNw&amp;oe=6AF97122">
 <meta name="theme-color" content="#FAF6EF">
-<meta name="page-type" content="place">
-<meta name="site-kind" content="other">
-<meta name="page-kind" content="place">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230E6E6A'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23FAF6EF' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script type="importmap">
 {
   "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js"
+    "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
   }
 }
 </script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-
-<canvas id="webgl" aria-hidden="true"></canvas>
-<div class="webgl-fallback" aria-hidden="true"></div>
 
 <header class="site-header" id="top">
   <div class="wrap header-inner">
@@ -52,28 +47,51 @@
 </header>
 
 <main id="main">
-  <!-- Plan: place page. Deal: nav-split, footer-visit, rhythm space, buttons solid, mark dots,
-       offer pair, place story, type moment address. Palette: flour-white ground #FAF6EF,
-       ink #1F2A28, ocean accent #0E6E6A — the colour of the water off Batu Bolong. -->
+  <!--
+    REDESIGN (Nov 2026), after a1.gallery 3D-landing collection:
+    huge type, one accent (ocean teal), generous whitespace, and a REAL
+    3D fish model as the HERO in its own stage — never behind text.
+    The stage background is a REAL ocean photo (Unsplash); the fish is
+    a REAL .glb/.gltf model (Barramundi Fish, CC0). No code-drawn
+    backgrounds, no procedural hero geometry.
+    STRUCTURAL GUARANTEE: the hero is two sibling blocks in normal flow —
+    a text zone on solid flour-white, then a full-bleed 3D stage band.
+    The <canvas> is absolutely positioned INSIDE .hero-stage
+    (position:relative; overflow:hidden), so it can only ever paint
+    inside that band. No fixed canvas, no canvas behind any copy.
+    The old defect (teal wave behind the subtitle, crest across the
+    headline) is impossible by construction, at any viewport width.
+  -->
 
   <!-- HERO -->
-  <section class="hero hero--photo" data-enter aria-labelledby="hero-title">
-    <figure class="hero-photo">
-      <img src="https://scontent-lax3-1.xx.fbcdn.net/v/t39.30808-6/471679573_3812486599000472_5987471764500415242_n.jpg?_nc_cat=104&amp;ccb=1-7&amp;_nc_sid=957871&amp;_nc_aid=0&amp;_nc_ohc=0Q9ChGR9XzQQ7kNvwHwWgzg&amp;_nc_oc=Adrf5XIsqhWJU-uz1X8W5ei_8qkCuoCxPqvc98d-oYBD7awBvLwBheDmJTdQbgbeZkMGm285ShIYSos_aaUFRB7G&amp;_nc_zt=23&amp;_nc_ht=scontent-lax3-1.xx&amp;_nc_gid=cVNdiQFwsfUeG4c42mKzrA&amp;oh=00_AQRBy6S_9sGH3PM9nMcUEnu0Ep1H_Qsh9PRr6sSd-CclNw&amp;oe=6AF97122" alt="Moana Fish Eatery in Canggu — Polynesian seafood restaurant" width="2400" height="1600" fetchpriority="high">
-    </figure>
-    <div class="wrap hero-words">
-      <h1 id="hero-title">Polynesian seafood, on Batu Bolong</h1>
-      <div class="hero-side">
-        <p class="hero-sub">Poke bowls, sashimi and grilled fish, steps from the beach. Open daily 9am – 11pm.</p>
-        <p class="hero-sub muted">★ 4.7 — from nearly 2,000 reviews</p>
+  <section class="hero" aria-labelledby="hero-title">
+    <!-- Zone 1 — text. Solid flour ground, no 3D anywhere near it. -->
+    <div class="wrap hero-text" data-enter>
+      <p class="hero-eyebrow">Canggu &middot; Batu Bolong &middot; Polynesian seafood</p>
+      <h1 id="hero-title">Polynesian seafood,<br>on <em>Batu&nbsp;Bolong</em></h1>
+      <p class="hero-sub">Poke bowls, sashimi and grilled fish, steps from the beach. Open daily 9am – 11pm.</p>
+      <p class="hero-rating"><span class="stars" aria-hidden="true">&starf;&starf;&starf;&starf;&starf;</span> 4.7 — from nearly 2,000 reviews</p>
+      <p class="hero-cta">
         <a class="btn btn--primary" href="#book">Book a table</a>
-      </div>
+        <a class="btn btn--ghost" href="#menu">See the menu</a>
+      </p>
+      <p class="hero-meta">Daily 09:00 – 23:00 &middot; Jl. Pantai Batu Bolong No. 28 &middot; WhatsApp +62 812-3815-8373</p>
     </div>
+
+    <!-- Zone 2 — the 3D hero stage. A REAL fish model (Barramundi Fish,
+         CC0, Khronos glTF-Sample-Assets) leaps over a REAL ocean photo
+         (Unsplash). The 3D lives ONLY here. -->
+    <div class="hero-stage" id="hero-stage" aria-label="3D barramundi fish leaping over a real ocean photo — decorative">
+      <canvas id="webgl" aria-hidden="true"></canvas>
+    </div>
+
+    <p class="wrap hero-scroll" aria-hidden="true">Scroll — the fish turns as you go &darr; &middot; Ocean photo: Unsplash</p>
   </section>
 
   <!-- VISIT -->
-  <section class="visit" id="visit" data-place="visit" aria-labelledby="visit-title">
+  <section class="visit" id="visit" aria-labelledby="visit-title">
     <div class="wrap">
+      <p class="kicker">Find us</p>
       <p class="type-moment"><a href="https://www.openstreetmap.org/search?query=Jl.%20Pantai%20Batu%20Bolong%2C%20Canggu">Batu Bolong</a></p>
       <div class="visit-split">
         <div class="visit-panel">
@@ -99,15 +117,16 @@
     </div>
   </section>
 
-  <!-- MENU / OFFER -->
+  <!-- MENU -->
   <section class="menu" id="menu" aria-labelledby="menu-title">
     <div class="wrap">
+      <p class="kicker">The menu</p>
       <div class="head-row">
         <h2 id="menu-title">From the sea</h2>
         <a class="head-link" href="#about">Our story <span aria-hidden="true">&rarr;</span></a>
       </div>
       <div class="menu-grid">
-        <div class="menu-groups" data-assumed>
+        <div class="menu-groups">
           <div class="menu-group">
             <h3 class="t-label">Raw &amp; fresh</h3>
             <ul class="rows">
@@ -136,28 +155,35 @@
           </figure>
         </div>
       </div>
-      <p class="menu-note" data-assumed>Prices in USD, approximate — the menu follows the daily catch, so ask what came in today. Sugarcane juices, poke bowls, sashimi, carpaccio, tartare and BBQ fish, with a Polynesian taste.</p>
+      <p class="menu-note">Prices in USD, approximate — the menu follows the daily catch, so ask what came in today. Sugarcane juices, poke bowls, sashimi, carpaccio, tartare and BBQ fish, with a Polynesian taste.</p>
     </div>
   </section>
 
-  <!-- ABOUT / THE PLACE -->
+  <!-- ABOUT -->
   <section class="about" id="about" aria-labelledby="about-title">
     <div class="wrap about-split">
       <div class="about-text">
+        <p class="kicker">Our story</p>
         <h2 id="about-title">Fresh fish, the Polynesian way</h2>
         <p>Moana brings the South Pacific to Batu Bolong: sashimi-grade yellowfin tuna from nearby waters, poke bowls, carpaccio and grilled fish — with sugarcane juices on the side. No frills, just the freshest fish, cooked simply.</p>
         <p>It is a small, laid-back room under the palms, a short walk from the beach. Come for lunch, stay for golden hour.</p>
         <a class="text-link" href="#gallery">See the room and the plates <span aria-hidden="true">&rarr;</span></a>
       </div>
-      <figure class="pl-photo about-photo">
-        <img src="https://scontent-lax3-1.cdninstagram.com/v/t51.82787-15/841340098_18080974229687555_2707445945530932203_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=110&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&amp;_nc_ohc=2amdJLSEWz8Q7kNvwGiKT0z&amp;_nc_oc=AdrdMj3B5itau7AyIL3XmNrDVujGDe04jQ3ES_LqRu9D1FqnshGhKleXb6V6DtRekfhVlZhq2yg8P7DmH6DVho36&amp;_nc_zt=23&amp;_nc_ht=scontent-lax3-1.cdninstagram.com&amp;_nc_gid=cVNdiQFwsfUeG4c42mKzrA&amp;oh=00_AQQtqqyRULAuCJF04Yybv4uZ9iyP6Pu2ORWR9hEMCDmioA&amp;oe=6AF9A134" alt="A dish at Moana Fish Eatery" width="1200" height="900" loading="lazy">
-      </figure>
+      <div class="about-photos">
+        <figure class="pl-photo about-photo">
+          <img src="https://scontent-lax3-1.cdninstagram.com/v/t51.82787-15/841340098_18080974229687555_2707445945530932203_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=110&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&amp;_nc_ohc=2amdJLSEWz8Q7kNvwGiKT0z&amp;_nc_oc=AdrdMj3B5itau7AyIL3XmNrDVujGDe04jQ3ES_LqRu9D1FqnshGhKleXb6V6DtRekfhVlZhq2yg8P7DmH6DVho36&amp;_nc_zt=23&amp;_nc_ht=scontent-lax3-1.cdninstagram.com&amp;_nc_gid=cVNdiQFwsfUeG4c42mKzrA&amp;oh=00_AQQtqqyRULAuCJF04Yybv4uZ9iyP6Pu2ORWR9hEMCDmioA&amp;oe=6AF9A134" alt="A dish at Moana Fish Eatery" width="1200" height="900" loading="lazy">
+        </figure>
+        <figure class="pl-photo about-photo">
+          <img src="https://scontent-lax3-1.xx.fbcdn.net/v/t39.30808-6/471679573_3812486599000472_5987471764500415242_n.jpg?_nc_cat=104&amp;ccb=1-7&amp;_nc_sid=957871&amp;_nc_aid=0&amp;_nc_ohc=0Q9ChGR9XzQQ7kNvwHwWgzg&amp;_nc_oc=Adrf5XIsqhWJU-uz1X8W5ei_8qkCuoCxPqvc98d-oYBD7awBvLwBheDmJTdQbgbeZkMGm285ShIYSos_aaUFRB7G&amp;_nc_zt=23&amp;_nc_ht=scontent-lax3-1.xx&amp;_nc_gid=cVNdiQFwsfUeG4c42mKzrA&amp;oh=00_AQRBy6S_9sGH3PM9nMcUEnu0Ep1H_Qsh9PRr6sSd-CclNw&amp;oe=6AF97122" alt="Moana Fish Eatery in Canggu — Polynesian seafood restaurant" width="2400" height="1600" loading="lazy">
+        </figure>
+      </div>
     </div>
   </section>
 
   <!-- GALLERY + TESTIMONIALS -->
   <section class="gallery" id="gallery" aria-labelledby="gallery-title">
     <div class="wrap">
+      <p class="kicker">On the table</p>
       <div class="head-row">
         <h2 id="gallery-title">The room and the plates</h2>
         <a class="head-link" href="#book">Book a table <span aria-hidden="true">&rarr;</span></a>
@@ -189,6 +215,7 @@
   <!-- BOOKING -->
   <section class="booking" id="book" aria-labelledby="book-title">
     <div class="wrap">
+      <p class="kicker">Reserve</p>
       <div class="head-row">
         <h2 id="book-title">Book a table</h2>
         <p class="head-line">We reply on WhatsApp within the day.</p>
@@ -197,7 +224,7 @@
         <figure class="pl-photo booking-photo">
           <img src="https://dynamic-media.tacdn.com/media/photo-o/10/75/1e/67/lunch-time.jpg" alt="Lunch time at Moana Fish Eatery" width="1200" height="900" loading="lazy">
         </figure>
-        <form class="form booking-form" action="https://wa.me/6281238158373" method="get" data-endpoint="" data-sent="Opening WhatsApp…" novalidate>
+        <form class="form booking-form" action="https://wa.me/6281238158373" method="get" data-sent="Opening WhatsApp…" novalidate>
           <div class="field">
             <label for="f-name">Name</label>
             <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="f-name-err">
@@ -250,7 +277,7 @@
       <a href="#visit">Visit</a>
       <a href="#book">Book a table</a>
     </nav>
-    <p class="footer-legal">Photos: Moana Fish Eatery on Instagram (<a href="https://www.instagram.com/moana.bali">@moana.bali</a>) · <a href="https://www.facebook.com/1744180662497753">Facebook</a> · Demo preview by <a href="https://github.com/kairo-works">Kairo</a></p>
+    <p class="footer-legal">Photos: Moana Fish Eatery on Instagram (<a href="https://www.instagram.com/moana.bali">@moana.bali</a>) · <a href="https://www.facebook.com/1744180662497753">Facebook</a> · Ocean photo: Unsplash · 3D fish: “Barramundi Fish” model (CC0, Microsoft 2017) via Khronos glTF-Sample-Assets · Demo preview by <a href="https://github.com/kairo-works">Kairo</a></p>
     <p class="footer-name" aria-hidden="true">MOANA</p>
   </div>
 </footer>

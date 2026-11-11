@@ -1,6 +1,12 @@
-/* Moana Fish Eatery — Polynesian seafood. Place page.
-   Palette (dealt for the trade): flour-white ground, warm ink, ocean accent —
-   the terracotta of a bread oven's tiles. Flat colour only, square corners. */
+/* Moana Fish Eatery — Polynesian seafood. Full redesign, Nov 2026.
+   After the a1.gallery 3D-landing collection: huge confident type, one
+   accent (ocean teal), generous whitespace, and a REAL 3D fish model as
+   the hero in its own stage over a REAL ocean photo.
+   BACKGROUNDS ARE REAL PHOTOGRAPHY ONLY: the hero stage is a real
+   Unsplash ocean photo; every other picture is a real restaurant photo.
+   No gradients, no shapes, no code-drawn art anywhere as background.
+   Flat solid colours are the only non-photo ground. The 3D fish is a
+   real .gltf model (Barramundi Fish, CC0) — see scene3d.js. */
 
 :root {
   --g-main: #faf6ef;
@@ -11,7 +17,8 @@
   --accent: #0e6e6a;
   --accent-hover: #0a5653;
   --accent-ink: #ffffff;
-  --gold: #b7791f;
+  --deep: #0a3f3d;
+  --gold: #e8a33d;
   --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
   --font-text: "Karla", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
   --wrap: 1200px;
@@ -46,7 +53,7 @@ a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 h1, h2, h3 { font-family: var(--font-display); font-weight: 600; margin: 0; }
-h2 { font-size: clamp(32px, 4vw, 44px); line-height: 1.1; letter-spacing: -0.01em; }
+h2 { font-size: clamp(34px, 4.5vw, 56px); line-height: 1.08; letter-spacing: -0.01em; }
 p { margin: 0; }
 
 .wrap {
@@ -64,6 +71,16 @@ p { margin: 0; }
   text-transform: uppercase;
   color: var(--ink);
   margin: 0 0 12px;
+}
+
+/* Section eyebrow label — small caps, teal, generous space above. */
+.kicker {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--s-2);
 }
 
 /* Skip link */
@@ -125,13 +142,8 @@ p { margin: 0; }
   font-weight: 500;
   font-size: 16px;
   padding: 8px 0;
-  background-image: linear-gradient(currentColor, currentColor);
-  background-size: 0% 2px;
-  background-repeat: no-repeat;
-  background-position: left calc(100% - 2px);
-  transition: background-size 0.25s ease;
 }
-.site-nav a:not(.btn):hover { text-decoration: none; background-size: 100% 2px; }
+.site-nav a:not(.btn):hover { text-decoration: underline; }
 .menu-toggle {
   display: none;
   background: none;
@@ -165,6 +177,12 @@ p { margin: 0; }
 .btn--primary { background: var(--accent); color: var(--accent-ink); }
 .btn--primary:hover { background: var(--accent-hover); text-decoration: none; transform: translateY(-1px); }
 .btn--primary:active { transform: translateY(1px); }
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+}
+.btn--ghost:hover { background: var(--ink); color: var(--g-main); text-decoration: none; }
 .btn-row { margin-top: var(--s-3); }
 
 /* ---------- Text links ---------- */
@@ -177,37 +195,102 @@ p { margin: 0; }
 .text-link:hover span, .head-link:hover span { transform: translateX(3px); }
 .text-link:hover, .head-link:hover { text-decoration: none; color: var(--accent); }
 
-/* ---------- Hero (place hero: photo bare, words on the ground below) ---------- */
+/* ---------- Hero ----------
+   TWO SEPARATE ZONES, stacked in normal flow — this is the guarantee:
+   Zone 1 (.hero-text) is plain text on solid flour-white. Zone 2
+   (.hero-stage) is the 3D band. The canvas is absolutely positioned
+   INSIDE .hero-stage (relative + overflow hidden), so it can only
+   paint inside that band. No text can ever meet a 3D object. */
 .hero { padding-top: 72px; }
-.hero-photo { margin: 0; }
-.hero-photo img {
-  width: 100%;
-  height: 480px;
-  object-fit: cover;
-  object-position: center;
+.hero-text {
+  padding-top: clamp(48px, 7vw, 88px);
+  padding-bottom: clamp(40px, 5vw, 64px);
 }
-.hero-words {
-  display: grid;
-  grid-template-columns: 6fr 6fr;
-  gap: var(--s-3);
-  padding-top: 40px;
-  padding-bottom: 56px;
-  align-items: start;
+.hero-eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--s-3);
 }
-.hero-words h1 {
-  font-size: 48px;
-  line-height: 53px;
-  letter-spacing: -0.01em;
-  max-width: 560px;
+.hero-text h1 {
+  font-size: clamp(52px, 8vw, 108px);
+  line-height: 1.0;
+  letter-spacing: -0.025em;
+  max-width: 1000px;
 }
-.hero-sub { font-size: 20px; line-height: 30px; max-width: 480px; }
-.hero-side .btn { margin-top: 24px; }
+.hero-text h1 em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent);
+}
+.hero-sub {
+  font-size: clamp(19px, 2vw, 22px);
+  line-height: 1.45;
+  max-width: 620px;
+  margin-top: var(--s-4);
+}
+.hero-rating {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: var(--s-2);
+}
+.hero-rating .stars { color: var(--gold); letter-spacing: 0.08em; }
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: var(--s-4);
+}
+.hero-meta {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: var(--s-3);
+}
 
-[data-enter] .hero-photo,
-[data-enter] .hero-words {
-  animation: hero-enter 0.9s ease both;
+/* Zone 2 — the 3D stage. Background = REAL ocean photo (Unsplash,
+   verified HTTP 200). A flat translucent deep-teal tint (::before)
+   calms the photo so the pale 3D fish reads clearly against it.
+   The tint is a flat colour, not a gradient. If WebGL or the model
+   fails, the canvas hides and the real photo simply stays. */
+.hero-stage {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: clamp(420px, 58vh, 620px);
+  background-color: var(--deep);
+  background-image: url("https://images.unsplash.com/photo-1439405326854-014607f694d7?q=80&w=1920&auto=format&fit=crop");
+  background-size: cover;
+  background-position: center 62%;
+  background-repeat: no-repeat;
 }
-[data-enter] .hero-words { animation-delay: 0.12s; }
+.hero-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgba(3, 42, 40, 0.38);
+  pointer-events: none;
+}
+#webgl {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+.hero-scroll {
+  padding-top: var(--s-2);
+  padding-bottom: var(--s-5);
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+}
+
+[data-enter] .hero-text { animation: hero-enter 0.9s ease both; }
 @keyframes hero-enter {
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: translateY(0); }
@@ -215,6 +298,7 @@ p { margin: 0; }
 
 /* ---------- Sections ---------- */
 main > section { padding: var(--s-7) 0; }
+main > section.hero { padding-top: 72px; padding-bottom: 0; }
 .head-row {
   display: flex;
   align-items: baseline;
@@ -232,15 +316,6 @@ main > section { padding: var(--s-7) 0; }
 }
 .type-moment a { color: var(--ink); }
 .type-moment a:hover { color: var(--accent); text-decoration: none; }
-.type-moment a::after {
-  content: "";
-  display: block;
-  height: 2px;
-  background: var(--accent);
-  width: 0;
-  transition: width 0.3s ease;
-}
-.type-moment a:hover::after { width: 100%; }
 .visit-split {
   display: grid;
   grid-template-columns: 6fr 6fr;
@@ -320,6 +395,7 @@ main > section { padding: var(--s-7) 0; }
   max-width: 520px;
 }
 .about-text .text-link { display: inline-block; margin-top: var(--s-2); }
+.about-photos { display: grid; gap: var(--s-3); align-content: start; }
 .about-photo img { aspect-ratio: 4 / 3; }
 
 /* ---------- Gallery ---------- */
@@ -439,9 +515,7 @@ main > section { padding: var(--s-7) 0; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1023px) {
-  .hero-photo img { height: 56vw; max-height: 480px; }
-  .hero-words { grid-template-columns: 1fr; padding-top: 32px; }
-  .hero-words h1 { font-size: 40px; line-height: 44px; }
+  .hero-text h1 { font-size: clamp(48px, 9vw, 72px); }
   .visit-split, .menu-grid, .about-split, .booking-split, .close-inner { grid-template-columns: 1fr; }
   .visit-photo img, .about-photo img, .booking-photo img { aspect-ratio: 16 / 9; }
   .menu-photos { grid-template-columns: 1fr 1fr; }
@@ -451,6 +525,7 @@ main > section { padding: var(--s-7) 0; }
 @media (max-width: 767px) {
   :root { --gut: 24px; }
   main > section { padding: 64px 0; }
+  main > section.hero { padding-top: 72px; padding-bottom: 0; }
   .site-nav {
     display: none;
     position: absolute;
@@ -468,11 +543,12 @@ main > section { padding: var(--s-7) 0; }
   .site-nav a:not(.btn) { padding: 14px 0; border-bottom: 1px solid var(--g-line); }
   .site-nav .nav-cta { margin-top: 16px; width: 100%; }
   .menu-toggle { display: block; }
-  .hero-photo img { height: auto; min-height: 292px; aspect-ratio: 4 / 3; }
-  .hero-words { padding-top: 24px; padding-bottom: 40px; }
-  .hero-words h1 { font-size: 32px; line-height: 37px; }
+  .hero-text { padding-top: 40px; padding-bottom: 32px; }
+  .hero-text h1 { font-size: 46px; line-height: 1.02; }
   .hero-sub { font-size: 18px; line-height: 28px; }
-  .hero-side .btn { width: 100%; }
+  .hero-cta .btn { flex: 1 1 100%; }
+  /* Mobile: text zone on top, 3D stage below it — still separate blocks. */
+  .hero-stage { height: 380px; }
   .type-moment { font-size: 48px; margin-bottom: 32px; }
   .visit-panel, .booking-form { padding: 24px; }
   .visit-cols { grid-template-columns: 1fr; }
@@ -491,33 +567,5 @@ main > section { padding: var(--s-7) 0; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  [data-enter] .hero-photo, [data-enter] .hero-words { opacity: 1; }
+  [data-enter] .hero-text { opacity: 1; }
 }
-
-/* ---------- 3D enhancement layer (Three.js, progressive enhancement) ----------
-   One fixed canvas behind the content (same pattern as the Kairo homepage):
-   it paints the flour ground itself, so the page reads exactly the same
-   with no WebGL — the canvas hides and the .webgl-fallback gradient shows. */
-#webgl {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  z-index: 0;
-  pointer-events: none;
-  background: var(--g-main);
-}
-.webgl-fallback {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background:
-    radial-gradient(50rem 32rem at 78% 68%, rgba(14, 110, 106, 0.16), transparent 60%),
-    radial-gradient(40rem 28rem at 12% 20%, rgba(14, 110, 106, 0.10), transparent 60%),
-    var(--g-main);
-}
-body.webgl-on .webgl-fallback { display: none; }
-/* Content sits above the fixed canvas. Header/action bar keep their own
-   fixed positioning and z-index; only main/footer need lifting. */
-main, .site-footer { position: relative; z-index: 1; }
