@@ -1,28 +1,15 @@
-/* Fold Canggu — full redesign, a1.gallery 3D-landing standard.
+/* Fold Canggu — landing page.
    Golden/cream theme. One strong accent: deep gold. Jade is secondary
    only (the green-tiled house). Huge centred hero type, generous
-   whitespace, and the 3D croissant in its OWN stage — never over text.
+   whitespace, and a real Fold photo below the headline — butter
+   croissants and canelés from the bakery's own counter.
 
-   BACKGROUNDS ARE REAL PHOTOS (user rule): the hero stage background is
-   a real café-interior photo (Unsplash) under a translucent cream veil;
-   the closing section background is a real croissant photo (Unsplash)
-   under a translucent dark veil for white text. There are NO CSS
-   gradients, shapes, or code-drawn art anywhere as background imagery.
-   Other sections sit on plain cream/white grounds (solid colour, not
-   drawn art) with real photography as their imagery.
-   The 3D object is a REAL scanned croissant (croissant.glb, Poly Haven
-   CC0) loaded with GLTFLoader — see fold-3d.js and model-credits.md.
-
-   ANTI-OVERLAP ARCHITECTURE (the old defect, fixed by construction):
-   - There is NO fixed / full-page canvas. The only canvas lives inside
-     .hero-stage, an in-flow box with overflow:hidden, placed BELOW the
-     hero text in normal document flow.
-   - .hero-text and .hero-stage are separate grid/flow zones; no negative
-     margins, no absolute positioning of the canvas over copy.
-   - The stage caption sits BELOW the stage, outside it.
-   - fold-3d.js fits the real croissant to the stage's own size with a
-     margin (see its fitCamera()), so it can never be clipped by the
-     stage or viewport edges, and it only rotates — it never translates. */
+   BACKGROUNDS ARE REAL PHOTOS (user rule): the closing section
+   background is a real croissant photo (Unsplash) under a translucent
+   dark veil for white text. There are NO CSS gradients, shapes, or
+   code-drawn art anywhere as background imagery. Other sections sit on
+   plain cream/white grounds (solid colour, not drawn art) with real
+   photography as their imagery. No 3D anywhere on this page. */
 
 :root {
   --g-main: #fbf7f0;
@@ -150,7 +137,7 @@ p { margin: 0; }
 .text-link:hover span, .head-link:hover span { transform: translateX(3px); }
 .text-link:hover, .head-link:hover { text-decoration: none; color: var(--gold-deep); }
 
-/* ---------- Hero: text zone, then 3D stage zone (separate, stacked) ---------- */
+/* ---------- Hero: text zone, then a real photo below it ---------- */
 .hero { padding: 56px 0 0; }
 .hero-text { text-align: center; }
 .eyebrow {
@@ -175,39 +162,13 @@ p { margin: 0; }
 }
 .hero-meta { margin-top: 20px; font-size: 15px; font-weight: 600; color: var(--muted); }
 
-/* The 3D stage: its own clear box. Height is capped so that at 1920x1000
-   the headline + stage both fit in the first viewport; at mobile widths
-   it is a shorter, fully self-contained box. */
-.hero-stage-figure { margin: 48px 0 0; }
-.hero-stage {
-  position: relative;
-  overflow: hidden;
-  height: clamp(340px, 44vh, 460px);
-  /* REAL PHOTO background (bright café interior, Unsplash) — verified HTTP 200,
-     viewed 11 Nov 2026. No gradients, no code-drawn art. */
-  background-color: var(--g-alt);
-  background-image: url("https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1600&q=80");
-  background-size: cover;
-  background-position: center;
-  border: 1px solid var(--g-line);
-}
-/* Translucent cream veil over the photo only — the photo stays visible
-   underneath, and the golden croissant pops against the softened scene.
-   (A veil is not background imagery; the photograph is.) */
-.hero-stage::before {
-  content: "";
-  position: absolute; inset: 0; z-index: 0;
-  background: rgba(251, 247, 240, 0.62);
-}
-#croissant-canvas {
-  position: absolute; inset: 0; z-index: 1;
-  display: block; width: 100%; height: 100%;
-}
-.hero-stage-fallback { display: none; position: absolute; inset: 0; z-index: 2; }
-.hero-stage-fallback img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
-body.no-webgl #croissant-canvas { display: none; }
-body.no-webgl .hero-stage-fallback { display: block; }
-.hero-stage-caption {
+/* The hero photo: a real Fold photo (butter croissants and canelés),
+   full width, cropped to a wide band so the headline + photo both fit
+   near the first viewport. No canvas, no 3D. */
+.hero-photo-figure { margin: 48px 0 0; }
+.hero-photo { border: 1px solid var(--g-line); }
+.hero-photo img { aspect-ratio: 16 / 9; object-position: center 30%; }
+.hero-photo-caption {
   text-align: center; font-size: 15px; color: var(--muted);
   padding: 16px 8px 0;
 }
@@ -383,8 +344,8 @@ main > section.hero { padding-bottom: 72px; }
   .hero-text h1 { font-size: 44px; }
   .hero-sub { font-size: 18px; }
   .hero-cta .btn { width: 100%; }
-  .hero-stage { height: 340px; }
-  .hero-stage-figure { margin-top: 36px; }
+  .hero-photo-figure { margin-top: 36px; }
+  .hero-photo img { aspect-ratio: 4 / 3; }
   .visit-panel, .booking-form { padding: 24px; }
   .menu-photos { grid-template-columns: 1fr; }
   .field-row { grid-template-columns: 1fr; }

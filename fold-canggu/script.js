@@ -21,15 +21,18 @@
   }
 
   /* Phone action bar: show once the hero button has scrolled away,
-     hide on any screen that already shows a booking action. */
+     hide on any screen that already shows a booking action — the booking
+     form and the footer — so the bar never covers text or a form. */
   var bar = document.querySelector(".actionbar");
   var heroBtn = document.querySelector(".hero-cta .btn");
   var book = document.getElementById("book");
+  var footer = document.querySelector(".site-footer");
   if (bar && heroBtn && "IntersectionObserver" in window) {
     var heroGone = false;
     var bookVisible = false;
+    var footerVisible = false;
     var update = function () {
-      bar.classList.toggle("visible", heroGone && !bookVisible);
+      bar.classList.toggle("visible", heroGone && !bookVisible && !footerVisible);
     };
     new IntersectionObserver(function (entries) {
       heroGone = !entries[0].isIntersecting;
@@ -40,6 +43,12 @@
         bookVisible = entries[0].isIntersecting;
         update();
       }, { threshold: 0.05 }).observe(book);
+    }
+    if (footer) {
+      new IntersectionObserver(function (entries) {
+        footerVisible = entries[0].isIntersecting;
+        update();
+      }, { threshold: 0.02 }).observe(footer);
     }
   }
 

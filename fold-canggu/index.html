@@ -15,14 +15,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
-  }
-}
-</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -49,14 +41,9 @@
 
 <main id="main">
 
-  <!-- HERO — a1.gallery rule, applied literally: huge centred type in its
-       own zone ABOVE, the 3D croissant in its own stage BELOW. The canvas
-       lives inside .hero-stage (in-flow, overflow hidden) and never
-       overlaps any text: there is no fixed/overlay canvas anywhere.
-       The stage background is a REAL PHOTO (bright café interior, Unsplash),
-       softened by a translucent cream veil so the golden model pops; the
-       3D object itself is a REAL scanned croissant (croissant.glb, Poly
-       Haven CC0) loaded with GLTFLoader — no procedural geometry. -->
+  <!-- HERO — huge centred type above, a real Fold photo below: butter
+       croissants and canelés from the bakery's own counter (Never Never
+       Land in Bali). No 3D, no canvas — just the photograph. -->
   <section class="hero" aria-labelledby="hero-title">
     <div class="wrap hero-text">
       <p class="eyebrow">Artisan French bakery &middot; Canggu, Bali &middot; &#9733; 4.3 on TripAdvisor</p>
@@ -70,14 +57,11 @@
     </div>
 
     <div class="wrap">
-      <figure class="hero-stage-figure">
-        <div class="hero-stage" id="croissant-stage">
-          <canvas id="croissant-canvas" aria-hidden="true"></canvas>
-          <div class="hero-stage-fallback" aria-hidden="true">
-            <img src="https://neverneverlandinbali.com/wp-content/uploads/2023/04/F10.jpg" alt="" width="957" height="1493" loading="lazy">
-          </div>
+      <figure class="hero-photo-figure">
+        <div class="photo hero-photo">
+          <img src="https://neverneverlandinbali.com/wp-content/uploads/2023/04/F10.jpg" alt="Butter croissants and canelés at Fold Canggu" width="957" height="1493" loading="eager" fetchpriority="high">
         </div>
-        <figcaption class="hero-stage-caption">The butter croissant &mdash; ~25k, baked through the morning. Scroll, and it turns.</figcaption>
+        <figcaption class="hero-photo-caption">The butter croissant &mdash; ~25k, baked through the morning.</figcaption>
       </figure>
     </div>
   </section>
@@ -161,7 +145,7 @@
             <img src="https://static.bali.live/uploads/54294/responsive-images/AUc7tXWCAjuX6_VNW_BfHgjO-D28k_7GAuyqnprwr2ZvgdSqdNzaM2sRkcY4awSutyq3Dp1scS2wOum1eLA2A5Y7NBl357_u7aJXwfDdAefazNxc9La36q2tYO9tvGlSo6mYQKMVaHu9njLZIx0VkkgZsEVBOROmWQKMtOQOVGLCoq2BfL-Z___responsive_1200_1600.jpg" alt="Pastries in Fold's display case" width="1200" height="1600" loading="lazy">
           </figure>
           <figure class="photo">
-            <img src="https://neverneverlandinbali.com/wp-content/uploads/2023/04/F10.jpg" alt="Butter croissant and canelés at Fold" width="957" height="1493" loading="lazy">
+            <img src="https://neverneverlandinbali.com/wp-content/uploads/2023/04/F7-1280x1600.jpg" alt="A butter croissant at Fold" width="1280" height="1600" loading="lazy">
           </figure>
         </div>
       </div>
@@ -289,7 +273,7 @@
       <a href="#visit">Visit</a>
       <a href="#book">Order ahead</a>
     </nav>
-    <p class="footer-legal">Photos: real photos of Fold Canggu from public web sources (Never Never Land in Bali, Social Expat, Bali.live, DocentPro, Satlantis) &mdash; shown for illustration in this preview; Fold&rsquo;s own photos will replace them on the live site &middot; Background photos: Unsplash &middot; 3D croissant: a real scan by Greg Zaal &amp; Dario Barresi, Poly Haven (CC0) &middot; Reviews: TripAdvisor &middot; Demo preview by <a href="https://github.com/kairo-works">Kairo</a></p>
+    <p class="footer-legal">Photos: real photos of Fold Canggu from public web sources (Never Never Land in Bali, Social Expat, Bali.live, DocentPro, Satlantis) &mdash; shown for illustration in this preview; Fold&rsquo;s own photos will replace them on the live site &middot; Background photos: Unsplash &middot; Reviews: TripAdvisor &middot; Demo preview by <a href="https://github.com/kairo-works">Kairo</a></p>
     <p class="footer-name" aria-hidden="true">FOLD</p>
   </div>
 </footer>
@@ -299,13 +283,5 @@
 </nav>
 
 <script src="script.js"></script>
-<script>
-/* If the 3D module (Three.js CDN) never loads at all, show the real-photo
-   stage fallback instead of an empty stage. */
-setTimeout(function () {
-  if (!document.body.classList.contains('webgl-on')) document.body.classList.add('no-webgl');
-}, 6000);
-</script>
-<script type="module" src="fold-3d.js"></script>
 </body>
 </html>
