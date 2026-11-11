@@ -508,3 +508,31 @@ main > section { padding: var(--s-7) 0; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   [data-enter] .hero-photo, [data-enter] .hero-words { opacity: 1; }
 }
+
+/* ---------- 3D layer (fold-3d.js) ---------- */
+/* One fixed Three.js canvas behind the page; the canvas renders the cream
+   ground itself, so no layout, copy or colour changes are needed. If WebGL
+   is unavailable the gradient fallback below shows instead and the page
+   stays fully readable. */
+#webgl {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+  pointer-events: none;
+}
+.webgl-fallback {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(60rem 40rem at 78% 22%, rgba(183, 121, 31, 0.20), transparent 60%),
+    radial-gradient(50rem 36rem at 12% 88%, rgba(30, 91, 68, 0.10), transparent 60%),
+    var(--g-main);
+}
+body.webgl-on .webgl-fallback { display: none; }
+
+/* Content sits above the fixed canvas. */
+main, .site-footer { position: relative; z-index: 1; }
