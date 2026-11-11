@@ -2,11 +2,10 @@
    Palette: warm cream ground, warm ink, terracotta accent — a Berawa
    sunrise over the brunch table. Flat colour only, square corners.
    Backgrounds are REAL PHOTOS (no gradients, no code-drawn art): the hero
-   3D stage sits over a photo of roasted coffee beans, the photo band is a
+   photo column is a photo of roasted coffee beans, the photo band is a
    real brunch-table photo, and every section image is a real photo.
-   The 3D hero is a real .glb model confined to its own stage element —
-   the hero words live in a separate grid column, so no 3D object can
-   ever cover headline, subtitle or buttons. */
+   The hero words live in a separate grid column from the photo, so the
+   photo can never cover headline, subtitle or buttons. */
 
 :root {
   --g-main: #fbf7f0;
@@ -190,10 +189,9 @@ p { margin: 0; }
 .text-link:hover, .head-link:hover { text-decoration: none; color: var(--accent); }
 
 /* ---------- Hero: two zones, structurally separate ----------
-   .hero-copy holds ALL words on solid cream. .hero-stage holds the real
-   photo backdrop + the WebGL canvas with the real .glb cup. The canvas
-   is absolutely positioned INSIDE the stage only — it cannot reach the
-   copy column at any viewport width. */
+   .hero-copy holds ALL words on solid cream. .hero-photo holds the real
+   coffee-bean photo. The photo is confined INSIDE its own element — it
+   cannot reach the copy column at any viewport width. */
 .hero {
   padding-top: var(--header-h);
   display: grid;
@@ -253,18 +251,16 @@ p { margin: 0; }
   margin-top: var(--s-4);
 }
 
-/* 3D stage: real photo backdrop, canvas on top of it, chips on solid
-   cream so they stay readable over the photo. */
-.hero-stage {
+/* Hero photo: a real photo of roasted coffee beans, with a readable
+   caption chip on solid cream. */
+.hero-photo {
   position: relative;
   overflow: hidden;
   background: #3a2a1e; /* warm coffee brown behind the photo while it loads */
   min-height: 480px;
-  touch-action: pan-y;
-  cursor: grab;
+  margin: 0;
 }
-.hero-stage.dragging { cursor: grabbing; }
-.stage-photo {
+.hero-photo-img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -272,19 +268,11 @@ p { margin: 0; }
   object-fit: cover;
   object-position: center;
 }
-#webgl {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  touch-action: pan-y;
-}
-#webgl[hidden] { display: none; }
-.stage-tag,
-.stage-hint {
+.hero-tag {
   position: absolute;
   z-index: 2;
+  top: 16px;
+  left: 16px;
   background: var(--g-main);
   color: var(--ink);
   padding: 8px 14px;
@@ -292,11 +280,7 @@ p { margin: 0; }
   font-weight: 600;
   letter-spacing: 0.04em;
   margin: 0;
-  pointer-events: none;
 }
-.stage-tag { top: 16px; left: 16px; }
-.stage-hint { bottom: 16px; left: 16px; }
-.hero-stage.model-off .stage-hint { display: none; }
 
 [data-enter] .hero-copy {
   animation: hero-enter 0.9s ease both;
@@ -566,7 +550,7 @@ main > section:not(.hero) { padding: var(--s-7) 0; }
   }
   .hero-copy { padding: var(--s-5) var(--gut) var(--s-4); }
   .hero-copy h1 { font-size: clamp(40px, 8vw, 56px); }
-  .hero-stage { min-height: 420px; aspect-ratio: 4 / 3; }
+  .hero-photo { min-height: 420px; aspect-ratio: 4 / 3; }
   .visit-split, .menu-grid, .about-split, .booking-split, .close-inner { grid-template-columns: 1fr; }
   .visit-photo img, .about-photo img, .booking-photo img { aspect-ratio: 16 / 9; }
   .menu-photos { grid-template-columns: 1fr 1fr; }
@@ -598,7 +582,7 @@ main > section:not(.hero) { padding: var(--s-7) 0; }
   .hero-copy h1 { font-size: 40px; line-height: 42px; }
   .hero-sub { font-size: 18px; line-height: 28px; }
   .hero-actions .btn { flex: 1 1 auto; }
-  .hero-stage { min-height: 340px; aspect-ratio: 1 / 1; }
+  .hero-photo { min-height: 340px; aspect-ratio: 1 / 1; }
   .type-moment { font-size: 48px; margin-bottom: 32px; }
   .visit-panel, .booking-form { padding: 24px; }
   .visit-cols { grid-template-columns: 1fr; }
