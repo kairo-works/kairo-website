@@ -1,0 +1,345 @@
+/* La Rosa Canggu — landing page.
+   Sunset/sand theme. One strong accent: terracotta rose (la rosa).
+   Huge centred hero type, generous whitespace, and a real photo of
+   Batu Bolong beach at sunset below the headline — the beach the
+   restaurant sits on.
+
+   BACKGROUNDS ARE REAL PHOTOS (user rule): the closing section
+   background is a real beach photo (Unsplash) under a translucent
+   dark veil for white text. There are NO CSS gradients, shapes, or
+   code-drawn art anywhere as background imagery. Other sections sit on
+   plain sand/white grounds (solid colour, not drawn art) with real
+   photography as their imagery. No 3D anywhere on this page. */
+
+:root {
+  --g-main: #fbf6ef;
+  --g-alt: #f6e8d8;
+  --g-line: #e5d3c0;
+  --ink: #2b211c;
+  --muted: #6d5a4e;
+  --rose: #b4432f;
+  --rose-deep: #93331f;
+  --rose-soft: #d4694f;
+  --sand-dark: #3a2a22;
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-text: "Karla", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --wrap: 1200px;
+  --gut: 24px;
+  --radius: 0;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--g-main);
+  color: var(--ink);
+  font: 400 16px/1.6 var(--font-text);
+}
+
+img { display: block; max-width: 100%; height: auto; }
+a { color: var(--rose-deep); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; margin: 0; }
+h2 { font-size: clamp(34px, 4.5vw, 52px); line-height: 1.08; letter-spacing: -0.01em; }
+p { margin: 0; }
+
+.wrap { width: min(100% - 2 * var(--gut), var(--wrap)); margin-inline: auto; }
+.muted { color: var(--muted); }
+.t-small { font-size: 14px; line-height: 1.5; }
+
+.section-label {
+  font: 700 13px/1.4 var(--font-text);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rose-deep);
+  margin: 0 0 16px;
+}
+.section-label::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--rose);
+  margin-top: 10px;
+}
+.t-label {
+  font-family: var(--font-text);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 12px;
+}
+
+.skip-link {
+  position: absolute; left: 16px; top: -60px; z-index: 200;
+  background: var(--ink); color: var(--g-main); padding: 12px 16px;
+  transition: top 0.15s ease;
+}
+.skip-link:focus { top: 12px; text-decoration: none; }
+:focus-visible { outline: 3px solid var(--rose-deep); outline-offset: 2px; }
+
+/* ---------- Header ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(251, 246, 239, 0.96);
+  border-bottom: 1px solid var(--g-line);
+}
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  min-height: 72px; gap: 24px;
+}
+.brand { display: inline-flex; align-items: baseline; gap: 10px; color: var(--ink); }
+.brand:hover { text-decoration: none; }
+.brand-mark {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; align-self: center;
+  background: var(--rose); color: var(--g-main);
+  font-family: var(--font-display); font-size: 20px; font-weight: 700;
+}
+.brand-name { font-family: var(--font-display); font-size: 26px; font-weight: 700; }
+.brand-place { font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.site-nav { display: flex; align-items: center; gap: 32px; }
+.site-nav a:not(.btn) { color: var(--ink); font-weight: 500; font-size: 16px; padding: 8px 0; }
+.site-nav a:not(.btn):hover { text-decoration: none; color: var(--rose-deep); }
+.menu-toggle {
+  display: none; background: none; border: 0; padding: 12px; cursor: pointer;
+  min-width: 44px; min-height: 44px;
+}
+.menu-toggle span { display: block; width: 22px; height: 2px; background: var(--ink); margin: 5px auto; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 52px; padding: 14px 30px;
+  font: 700 16px/1.25 var(--font-text);
+  border: 0; border-radius: var(--radius); cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.12s ease;
+}
+.btn--primary { background: var(--rose-deep); color: #fff; }
+.btn--primary:hover { background: #752713; text-decoration: none; transform: translateY(-1px); }
+.btn--primary:active { transform: translateY(1px); }
+.btn--ghost {
+  background: transparent; color: var(--ink);
+  border: 2px solid var(--ink);
+}
+.btn--ghost:hover { background: var(--ink); color: var(--g-main); text-decoration: none; }
+.btn-row { margin-top: 24px; }
+
+.text-link, .head-link { font-weight: 700; font-size: 16px; color: var(--ink); }
+.text-link span, .head-link span { transition: transform 0.2s ease; display: inline-block; }
+.text-link:hover span, .head-link:hover span { transform: translateX(3px); }
+.text-link:hover, .head-link:hover { text-decoration: none; color: var(--rose-deep); }
+
+/* ---------- Hero: text zone, then a real photo below it ---------- */
+.hero { padding: 56px 0 0; }
+.hero-text { text-align: center; }
+.eyebrow {
+  font-size: 14px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--rose-deep); margin-bottom: 24px;
+}
+.hero-text h1 {
+  font-size: clamp(46px, 7.2vw, 96px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.hero-text h1 em { font-style: italic; color: var(--rose-deep); }
+.hero-sub {
+  font-size: clamp(18px, 2vw, 21px); line-height: 1.55;
+  max-width: 620px; margin: 28px auto 0; color: var(--ink);
+}
+.hero-cta {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;
+  margin: 32px 0 0;
+}
+.hero-meta { margin-top: 20px; font-size: 15px; font-weight: 600; color: var(--muted); }
+
+/* The hero photo: a real photo of Batu Bolong beach at sunset, full
+   width, cropped to a wide band so the headline + photo both fit near
+   the first viewport. No canvas, no 3D. */
+.hero-photo-figure { margin: 48px 0 0; }
+.hero-photo { border: 1px solid var(--g-line); }
+.hero-photo img { aspect-ratio: 16 / 9; object-position: center 40%; }
+.hero-photo-caption {
+  text-align: center; font-size: 15px; color: var(--muted);
+  padding: 16px 8px 0;
+}
+
+/* ---------- Sections ---------- */
+main > section { padding: 96px 0; }
+main > section.hero { padding-bottom: 72px; }
+.head-row {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 24px; margin-bottom: 48px; flex-wrap: wrap;
+}
+.head-line { font-size: 16px; color: var(--muted); max-width: 520px; }
+
+/* ---------- Visit ---------- */
+.visit-split {
+  display: grid; grid-template-columns: 5fr 7fr; gap: 24px; align-items: stretch;
+  margin-top: 40px;
+}
+.visit-panel { background: var(--g-alt); padding: 48px; }
+.visit-address { font-family: var(--font-display); font-size: 26px; line-height: 1.35; margin-bottom: 16px; }
+.visit-hours { margin: 32px 0 0; }
+.visit-hours div {
+  display: flex; justify-content: space-between; gap: 12px;
+  font-size: 17px; padding: 10px 0; border-top: 1px solid var(--g-line);
+}
+.visit-hours dt { font-weight: 600; }
+.visit-hours dd { margin: 0; font-variant-numeric: tabular-nums; }
+.visit-note { margin-top: 24px; color: var(--muted); font-size: 16px; line-height: 1.6; }
+.photo { margin: 0; overflow: hidden; }
+.photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.35s ease; }
+.photo:hover img { transform: scale(1.03); }
+.visit-photo { min-height: 320px; }
+
+/* ---------- Menu ---------- */
+.menu { background: #fff; }
+.menu-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 48px; align-items: start; }
+.menu-groups { display: grid; gap: 48px; }
+.menu-group .rows { list-style: none; margin: 0; padding: 0; }
+.rows li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "name price" "desc price";
+  column-gap: 16px;
+  min-height: 44px; padding: 12px 0;
+  border-bottom: 1px solid var(--g-line);
+  align-items: center;
+}
+.row-name { grid-area: name; font-size: 17px; line-height: 1.4; font-weight: 600; }
+.row-desc { grid-area: desc; font-size: 15px; line-height: 1.45; color: var(--muted); }
+.row-price { grid-area: price; font-size: 17px; font-weight: 700; color: var(--rose-deep); font-variant-numeric: tabular-nums; }
+.menu-note { margin-top: 24px; color: var(--muted); font-size: 16px; line-height: 1.6; }
+.menu-photos { display: grid; gap: 24px; position: sticky; top: 96px; }
+.menu-photos .photo img { aspect-ratio: 4 / 3; }
+
+/* ---------- About ---------- */
+.about-split { display: grid; grid-template-columns: 6fr 6fr; gap: 48px; align-items: start; }
+.about-text h2 { margin-bottom: 24px; }
+.about-text p { font-size: 19px; line-height: 1.6; margin-bottom: 16px; max-width: 520px; }
+.about-text .text-link { display: inline-block; margin-top: 8px; }
+.about-photo img { aspect-ratio: 4 / 3; }
+
+/* ---------- Gallery ---------- */
+.gallery-lead { margin-bottom: 2px; }
+.gallery-lead img { aspect-ratio: 16 / 9; }
+.gallery-wall { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+.gallery-wall .photo img { aspect-ratio: 1 / 1; }
+
+/* ---------- Booking ---------- */
+.booking-split { display: grid; grid-template-columns: 6fr 6fr; gap: 24px; align-items: stretch; }
+.booking-photo img { aspect-ratio: 4 / 3; }
+.booking-form { background: var(--g-alt); padding: 48px; display: grid; gap: 16px; align-content: start; }
+.field label { display: block; font-weight: 700; margin-bottom: 6px; }
+.field input {
+  width: 100%; min-height: 48px; padding: 12px 14px;
+  font: 400 16px/1.5 var(--font-text); color: var(--ink);
+  background: var(--g-main); border: 1px solid var(--g-line); border-radius: var(--radius);
+}
+.field input:focus { outline: 3px solid var(--rose-deep); outline-offset: 1px; border-color: var(--rose-deep); }
+.field input[aria-invalid="true"] { border-color: var(--rose-deep); }
+.field__error { color: var(--rose-deep); font-size: 14px; margin: 6px 0 0; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form__status { font-size: 16px; font-weight: 700; min-height: 24px; }
+
+/* ---------- Close ---------- */
+/* REAL PHOTO background (a beach at golden hour, Unsplash) under a dark
+   veil so the white text stays readable. Photo verified HTTP 200,
+   viewed 11 Nov 2026. */
+.close {
+  position: relative;
+  background-color: #2b211c;
+  background-image: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80");
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+}
+.close::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: rgba(43, 33, 28, 0.78);
+}
+.close-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 6fr 6fr; gap: 48px; align-items: center; }
+.close h2, .close p { color: #fff; }
+.close .btn--primary { background: var(--rose); color: #fff; }
+.close .btn--primary:hover { background: var(--rose-soft); }
+.close-text h2 { margin-bottom: 16px; }
+.close-text p { font-size: 20px; line-height: 1.5; margin-bottom: 24px; max-width: 420px; color: rgba(255, 255, 255, 0.88); }
+.close-photo { border: 8px solid #fff; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35); }
+.close-photo img { aspect-ratio: 1 / 1; }
+
+/* ---------- Footer ---------- */
+.site-footer { padding: 96px 0 64px; border-top: 1px solid var(--g-line); }
+.footer-address { font-family: var(--font-display); font-size: 32px; line-height: 1.25; margin-bottom: 16px; }
+.footer-address a { color: var(--ink); }
+.footer-hours { color: var(--muted); margin-bottom: 32px; }
+.footer-nav { display: flex; flex-wrap: wrap; gap: 8px 32px; margin-bottom: 32px; }
+.footer-nav a { color: var(--ink); font-weight: 600; }
+.footer-legal { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+.footer-name {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(64px, 12vw, 170px); line-height: 1; letter-spacing: 0.04em;
+  color: var(--ink); margin: 0; user-select: none;
+}
+
+/* ---------- Phone action bar ---------- */
+.actionbar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
+  padding: 12px var(--gut) calc(12px + env(safe-area-inset-bottom, 0px));
+  background: var(--g-main); border-top: 1px solid var(--g-line);
+  transform: translateY(110%); transition: transform 0.3s ease;
+}
+.actionbar.visible { transform: translateY(0); }
+.actionbar .btn { width: 100%; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1023px) {
+  .visit-split, .menu-grid, .about-split, .booking-split, .close-inner { grid-template-columns: 1fr; }
+  .menu-photos { grid-template-columns: 1fr 1fr; position: static; }
+  .menu-photos .photo img { aspect-ratio: 4 / 3; }
+  .gallery-wall { grid-template-columns: 1fr 1fr; }
+  .visit-photo img, .about-photo img, .booking-photo img { aspect-ratio: 16 / 9; }
+}
+
+@media (max-width: 767px) {
+  main > section { padding: 64px 0; }
+  main > section.hero { padding: 40px 0 56px; }
+  .site-nav {
+    display: none; position: absolute; top: 72px; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--g-main); border-bottom: 1px solid var(--g-line);
+    padding: 8px 24px 16px;
+  }
+  .site-nav.open { display: flex; }
+  .site-nav a:not(.btn) { padding: 14px 0; border-bottom: 1px solid var(--g-line); }
+  .site-nav .nav-cta { margin-top: 16px; width: 100%; }
+  .menu-toggle { display: block; }
+  .hero-text h1 { font-size: 44px; }
+  .hero-sub { font-size: 18px; }
+  .hero-cta .btn { width: 100%; }
+  .hero-photo-figure { margin-top: 36px; }
+  .hero-photo img { aspect-ratio: 4 / 3; }
+  .visit-panel, .booking-form { padding: 24px; }
+  .menu-photos { grid-template-columns: 1fr; }
+  .field-row { grid-template-columns: 1fr; }
+  .head-row { margin-bottom: 32px; }
+  .btn { width: 100%; }
+  .head-row .btn { width: auto; }
+  .close-text { order: 1; }
+  .close-photo { order: 2; }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
