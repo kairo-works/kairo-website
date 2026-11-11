@@ -21,16 +21,14 @@
 <script type="importmap">
 {
   "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js"
+    "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
   }
 }
 </script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-
-<canvas id="webgl" aria-hidden="true"></canvas>
-<div class="webgl-fallback" aria-hidden="true"></div>
 
 <header class="site-header" id="top">
   <div class="wrap header-inner">
@@ -52,24 +50,38 @@
 </header>
 
 <main id="main">
-  <!-- Plan: place page. Deal: nav-split, footer-visit, rhythm space, buttons solid, mark dots,
-       offer pair, place story, type moment address. Palette: warm cream ground #FBF7F0,
-       ink #2A2320, terracotta accent #B5502A — a Berawa sunrise over the brunch table. -->
+  <!-- Rebuild: a1.gallery 3D-landing standard. The hero is two zones that can
+       never overlap — the words live in their own column, the real 3D coffee
+       cup (a real .glb model, not code-drawn geometry) lives in its own
+       stage over a real photo of roasted coffee beans. Palette: warm cream
+       ground #FBF7F0, ink #2A2320, terracotta accent #B5502A. -->
 
-  <!-- HERO -->
-  <section class="hero hero--photo" data-enter aria-labelledby="hero-title">
-    <figure class="hero-photo">
-      <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&amp;w=2400&amp;auto=format&amp;fit=crop" alt="A brunch table spread with coffee, eggs and fresh fruit" width="2400" height="1600" fetchpriority="high">
-    </figure>
-    <div class="wrap hero-words">
-      <h1 id="hero-title">Aussie brunch, 300 metres from Berawa beach</h1>
-      <div class="hero-side">
-        <p class="hero-sub">All-day brunch, smoothie bowls and our own Indonesian coffee blend. Open daily 7am – 5pm.</p>
-        <p class="hero-sub muted">★ 4.6 — 499 reviews on TripAdvisor</p>
+  <!-- HERO: text zone + 3D stage zone -->
+  <section class="hero" data-enter aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <p class="hero-eyebrow">Berawa &middot; Canggu, Bali</p>
+      <h1 id="hero-title">Aussie brunch, 300 metres from <span class="accent-word">Berawa beach</span></h1>
+      <p class="hero-sub">All-day brunch, smoothie bowls and our own Indonesian coffee blend. Open daily 7am &ndash; 5pm.</p>
+      <p class="hero-rating">&starf; 4.6 &mdash; 499 reviews on TripAdvisor</p>
+      <p class="hero-actions">
         <a class="btn btn--primary" href="#book">Book a table</a>
-      </div>
+        <a class="btn btn--ghost" href="#menu">See the menu</a>
+      </p>
+      <p class="hero-facts"><span>Daily 07:00&ndash;17:00</span><span aria-hidden="true">&middot;</span><span>Jl. Pantai Berawa No. 99</span></p>
+    </div>
+    <div class="hero-stage" id="hero-stage">
+      <img class="stage-photo" src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&amp;w=1600&amp;auto=format&amp;fit=crop" alt="Roasted Indonesian coffee beans" width="1600" height="1067" fetchpriority="high">
+      <canvas id="webgl" hidden aria-hidden="true"></canvas>
+      <p class="stage-tag">Our house blend &mdash; in 3D</p>
+      <p class="stage-hint">Drag to spin the cup</p>
     </div>
   </section>
+
+  <!-- PHOTO BAND: the brunch table, real photography -->
+  <figure class="photo-band">
+    <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&amp;w=2400&amp;auto=format&amp;fit=crop" alt="A brunch table spread with coffee, eggs and fresh fruit" width="2400" height="1600" loading="lazy">
+    <figcaption><span>The brunch table &mdash; all day, every day</span></figcaption>
+  </figure>
 
   <!-- VISIT -->
   <section class="visit" id="visit" data-place="visit" aria-labelledby="visit-title">
@@ -264,7 +276,7 @@
       <a href="#visit">Visit</a>
       <a href="#book">Book a table</a>
     </nav>
-    <p class="footer-legal">Photos: Unsplash — stock photos shown for illustration, to be replaced with Ruko&rsquo;s own photos · Reviews: TripAdvisor · Demo preview by <a href="https://github.com/kairo-works">Kairo</a></p>
+    <p class="footer-legal">Photos: Unsplash — stock photos shown for illustration, to be replaced with Ruko&rsquo;s own photos · Reviews: TripAdvisor · 3D coffee cup model: &ldquo;Coffee cup&rdquo; by Poly by Google, <a href="https://poly.pizza/m/2zk0pGhndM4">CC-BY 3.0</a> · Demo preview by <a href="https://github.com/kairo-works">Kairo</a></p>
     <p class="footer-name" aria-hidden="true">RUKO</p>
   </div>
 </footer>

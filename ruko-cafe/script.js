@@ -23,7 +23,7 @@
   /* Phone action bar: show once the hero button has scrolled away,
      hide on any screen that already shows a booking action. */
   var bar = document.querySelector(".actionbar");
-  var heroBtn = document.querySelector(".hero-side .btn");
+  var heroBtn = document.querySelector(".hero-actions .btn--primary");
   var book = document.getElementById("book");
   if (bar && heroBtn && "IntersectionObserver" in window) {
     var heroGone = false;
