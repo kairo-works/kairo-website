@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" data-type="place" data-page-mode="full" data-buttons="solid" data-motion="on">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember — Wood-fired grill &amp; bistro, Old Mill District</title>
+<meta name="description" content="Ember is a wood-fired grill and bistro in the Old Mill District. Steak, smoke and seasonal plates, Tuesday to Sunday. Book a table.">
+<meta property="og:title" content="Ember — Wood-fired grill &amp; bistro">
+<meta property="og:description" content="Steak, smoke and seasonal plates in the Old Mill District. Book a table.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1200&q=80&auto=format&fit=crop">
+<meta name="theme-color" content="#FAF6EF">
+<meta name="page-type" content="place">
+<meta name="site-kind" content="other">
+<meta name="page-kind" content="place">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23B3341F'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23FAF6EF' text-anchor='middle'%3EE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top" aria-label="Ember — home">
+      <span class="brand-mark" aria-hidden="true">E</span>
+      <span class="brand-name">Ember</span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <a href="#menu">Menu</a>
+      <a href="#about">About</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#visit">Visit</a>
+      <a class="btn btn--primary nav-cta" href="#book">Book a table</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <!-- Plan: place page. Deal: nav-split, footer-visit, rhythm space, buttons solid, mark dots,
+       offer pair, place story, type moment address. Palette: flour-white ground #FAF6EF,
+       ink #241B14, ember accent #B3341F — the terracotta of a bread oven's tiles, fitting a grill. -->
+
+  <!-- HERO -->
+  <section class="hero hero--photo" data-enter aria-labelledby="hero-title">
+    <figure class="hero-photo">
+      <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=2400&q=80&auto=format&fit=crop" alt="Skewers grilling over open fire at Ember" width="2400" height="1600" fetchpriority="high">
+    </figure>
+    <div class="wrap hero-words">
+      <h1 id="hero-title">Wood-fired grill, Old Mill District</h1>
+      <div class="hero-side">
+        <p class="hero-sub">Steak, smoke and seasonal plates. Open Tuesday to Sunday, from noon.</p>
+        <a class="btn btn--primary" href="#book">Book a table</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section class="visit" id="visit" data-place="visit" aria-labelledby="visit-title">
+    <div class="wrap">
+      <p class="type-moment"><a href="https://www.openstreetmap.org/search?query=Old%20Mill%20District">Old Mill District</a></p>
+      <div class="visit-split">
+        <div class="visit-panel">
+          <h2 id="visit-title">Visit</h2>
+          <div class="visit-cols">
+            <div class="visit-address">
+              <p>Ember<br>Old Mill District</p>
+              <a class="text-link" href="https://www.openstreetmap.org/search?query=Old%20Mill%20District">See the area <span aria-hidden="true">&rarr;</span></a>
+            </div>
+            <div class="visit-hours" data-assumed>
+              <h3 class="t-label">Hours</h3>
+              <dl>
+                <div><dt>Tue – Thu</dt><dd>12:00 – 22:00</dd></div>
+                <div><dt>Fri – Sat</dt><dd>12:00 – 23:00</dd></div>
+                <div><dt>Sunday</dt><dd>12:00 – 21:00</dd></div>
+                <div><dt>Monday</dt><dd>Closed</dd></div>
+              </dl>
+            </div>
+          </div>
+          <p class="visit-note">Walk-ins welcome at the counter. The dining room is booked ahead on Fridays and Saturdays.</p>
+        </div>
+        <figure class="pl-photo visit-photo">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=80&auto=format&fit=crop" alt="The dining room at Ember, tables set for dinner" width="1200" height="900" loading="lazy">
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU / OFFER -->
+  <section class="menu" id="menu" aria-labelledby="menu-title">
+    <div class="wrap">
+      <div class="head-row">
+        <h2 id="menu-title">From the fire</h2>
+        <a class="head-link" href="#about">See the room <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-groups">
+          <div class="menu-group">
+            <h3 class="t-label">From the grill</h3>
+            <ul class="rows">
+              <li><span class="row-name">Wood-fired ribeye, 300 g</span><span class="row-desc">Dry-aged 28 days, ember butter</span><span class="row-price">$38</span></li>
+              <li><span class="row-name">Smoked short rib</span><span class="row-desc">Twelve hours over oak, pickled onion</span><span class="row-price">$34</span></li>
+              <li><span class="row-name">Half chicken, ember-roasted</span><span class="row-desc">Lemon, garlic, pan juices</span><span class="row-price">$26</span></li>
+              <li><span class="row-name">Whole sea bass, grilled</span><span class="row-desc">Fennel, green olive, charred lemon</span><span class="row-price">$32</span></li>
+            </ul>
+          </div>
+          <div class="menu-group">
+            <h3 class="t-label">To start &amp; finish</h3>
+            <ul class="rows">
+              <li><span class="row-name">Charred sourdough &amp; smoked butter</span><span class="row-desc">Baked in-house each morning</span><span class="row-price">$9</span></li>
+              <li><span class="row-name">Burrata, tomato &amp; basil</span><span class="row-desc">Olive oil, aged balsamic</span><span class="row-price">$14</span></li>
+              <li><span class="row-name">Burnt honey panna cotta</span><span class="row-desc">Bee pollen, rye crumb</span><span class="row-price">$11</span></li>
+              <li><span class="row-name">Dark chocolate &amp; rye tart</span><span class="row-desc">Smoked salt, cream</span><span class="row-price">$12</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="menu-photos">
+          <figure class="pl-photo">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=1200&q=80&auto=format&fit=crop" alt="Glazed short ribs fresh from the grill" width="1200" height="900" loading="lazy">
+          </figure>
+          <figure class="pl-photo">
+            <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=1200&q=80&auto=format&fit=crop" alt="A plated main course at Ember" width="1200" height="900" loading="lazy">
+          </figure>
+        </div>
+      </div>
+      <p class="menu-note" data-assumed>Prices as shown; the menu changes with the market, so ask your server what came in today.</p>
+    </div>
+  </section>
+
+  <!-- ABOUT / THE PLACE -->
+  <section class="about" id="about" aria-labelledby="about-title">
+    <div class="wrap about-split">
+      <div class="about-text">
+        <h2 id="about-title">Fire, smoke and a short menu</h2>
+        <p>Ember started in 2019 with one wood oven, a short menu and a rule: if it does not go over fire, it does not go on the plate. The menu is written each morning around what the market brought in, and the same two people have run the kitchen and the room since the first night.</p>
+        <p>There are forty seats, a counter for walk-ins and a cellar of wines from small growers. Nothing here is rushed, and nothing is dressed up to look like more than it is.</p>
+        <a class="text-link" href="#gallery">See the room and the plates <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <figure class="pl-photo about-photo">
+        <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1200&q=80&auto=format&fit=crop" alt="Cooks at work in Ember's kitchen" width="1200" height="900" loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <!-- GALLERY + TESTIMONIALS -->
+  <section class="gallery" id="gallery" aria-labelledby="gallery-title">
+    <div class="wrap">
+      <div class="head-row">
+        <h2 id="gallery-title">The room and the plates</h2>
+        <a class="head-link" href="#book">Book a table <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="gallery-wall">
+        <figure class="pl-photo"><img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=900&q=80&auto=format&fit=crop" alt="Tables set in the dining room" width="900" height="900" loading="lazy"></figure>
+        <figure class="pl-photo"><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=900&q=80&auto=format&fit=crop" alt="The bar at Ember in the evening" width="900" height="900" loading="lazy"></figure>
+        <figure class="pl-photo"><img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=900&q=80&auto=format&fit=crop" alt="Cocktails on the bar" width="900" height="900" loading="lazy"></figure>
+        <figure class="pl-photo"><img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=900&q=80&auto=format&fit=crop" alt="Dessert served at the table" width="900" height="900" loading="lazy"></figure>
+      </div>
+      <div class="voices" id="voices" aria-labelledby="voices-title">
+        <h2 id="voices-title">What regulars say</h2>
+        <div class="voice-cards">
+          <blockquote class="voice-card">
+            <img class="voice-face" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80&auto=format&fit=crop" alt="Portrait of Sarah M." width="200" height="200" loading="lazy">
+            <p>&ldquo;The ribeye is the best thing I have eaten in this city all year. We book the same table every month.&rdquo;</p>
+            <footer><cite>Sarah M.</cite> <span>Regular since 2021</span></footer>
+          </blockquote>
+          <blockquote class="voice-card">
+            <img class="voice-face" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80&auto=format&fit=crop" alt="Portrait of David R." width="200" height="200" loading="lazy">
+            <p>&ldquo;We came for a birthday and stayed three hours. Nobody rushed us, and nobody needed to.&rdquo;</p>
+            <footer><cite>David R.</cite> <span>Birthday regular</span></footer>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section class="booking" id="book" aria-labelledby="book-title">
+    <div class="wrap">
+      <div class="head-row">
+        <h2 id="book-title">Book a table</h2>
+        <p class="head-line">We reply within a day.</p>
+      </div>
+      <div class="booking-split">
+        <figure class="pl-photo booking-photo">
+          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1200&q=80&auto=format&fit=crop" alt="A dish on the table, ready to be served" width="1200" height="900" loading="lazy">
+        </figure>
+        <form class="form booking-form" action="mailto:bookings@ember.example" method="post" enctype="text/plain" data-endpoint="" data-sent="Your table request is in. We reply within a day." novalidate>
+          <div class="field">
+            <label for="f-name">Name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="f-name-err">
+            <p class="field__error" id="f-name-err" hidden>Write the name the booking is under.</p>
+          </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="f-email-err">
+            <p class="field__error" id="f-email-err" hidden>Write an email address with an @, like name@example.com.</p>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="f-date">Date</label>
+              <input id="f-date" name="date" type="text" autocomplete="off" placeholder="e.g. Friday 14 November" required aria-describedby="f-date-err">
+              <p class="field__error" id="f-date-err" hidden>Write the day you want to come.</p>
+            </div>
+            <div class="field">
+              <label for="f-guests">Guests</label>
+              <input id="f-guests" name="guests" type="text" inputmode="numeric" autocomplete="off" placeholder="e.g. 2" required aria-describedby="f-guests-err">
+              <p class="field__error" id="f-guests-err" hidden>Write how many people, as a number.</p>
+            </div>
+          </div>
+          <div class="btn-row"><button class="btn btn--primary" type="submit">Request a table</button></div>
+          <p class="form__status" role="status" data-form-status></p>
+          <p class="t-small muted">We reply within a day. For parties over eight, email us directly.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSE -->
+  <section class="close" aria-labelledby="close-title">
+    <div class="wrap close-inner">
+      <div class="close-text">
+        <h2 id="close-title">Come hungry.</h2>
+        <p>Lunch from noon, dinner from five. The fire is already lit.</p>
+        <a class="btn btn--primary" href="#book">Book a table</a>
+      </div>
+      <figure class="pl-photo close-photo">
+        <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=1200&q=80&auto=format&fit=crop" alt="Sliced steak on the plate" width="1200" height="900" loading="lazy">
+      </figure>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer" id="contact">
+  <div class="wrap">
+    <p class="footer-address"><a href="https://www.openstreetmap.org/search?query=Old%20Mill%20District">Ember, Old Mill District</a></p>
+    <p class="footer-hours" data-assumed>Tue – Thu 12:00 – 22:00 · Fri – Sat 12:00 – 23:00 · Sun 12:00 – 21:00 · Mon closed</p>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="#menu">Menu</a>
+      <a href="#about">About</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#visit">Visit</a>
+      <a href="#book">Book a table</a>
+    </nav>
+    <p class="footer-legal">Photographs: <a href="https://unsplash.com">Unsplash</a> · <a href="mailto:bookings@ember.example">bookings@ember.example</a></p>
+    <p class="footer-name" aria-hidden="true">EMBER</p>
+  </div>
+</footer>
+
+<nav class="actionbar" aria-label="Book">
+  <a class="btn btn--primary" href="#book">Book a table</a>
+</nav>
+
+<script src="script.js"></script>
+</body>
+</html>
